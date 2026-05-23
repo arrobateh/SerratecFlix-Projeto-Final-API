@@ -30,7 +30,7 @@ public class Filme {
 	private Long id;
 	
 	
-	@Column(name = "titulo", nullable = false, length = 40)
+	@Column(name = "titulo", nullable = false, length = 40, unique = true)
 	@NotBlank(message = "O titulo do filme é obrigatório")
 	@Size(max = 100, message = "O titulo do filme deve ter no máximo 40 caracteres")
 	private String titulo;
