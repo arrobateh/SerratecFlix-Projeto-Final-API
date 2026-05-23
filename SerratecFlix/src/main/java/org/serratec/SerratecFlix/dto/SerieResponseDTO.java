@@ -33,7 +33,7 @@ public class SerieResponseDTO {
         this.temporadas = serie.getTemporadas();
         this.episodios = serie.getEpisodios();
         this.dataLancamento = serie.getDataLancamento();
-        this.notaMediaSerie = serie.getNotaMediaSerie()
+        this.notaMediaSerie = serie.getNotaMediaSerie();
         this.categoria = serie.getCategoria();
     }
 }
