@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -54,6 +56,10 @@ public class Filme {
 	@Column(name = "nota_media")
 	@NotNull(message = "A nota média do filme é obrigatória")
 	private Double notaMedia;
+	
+	@Enumerated(EnumType.STRING) 
+	@Column(name = "classificacao_indicativa", nullable = false)
+	private ClassificacaoIndicativa classificacaoIndicativa;
 
 	@JsonBackReference
 	@ManyToOne
@@ -74,7 +80,7 @@ public class Filme {
 			 String descricao,
 			 Integer duracao,
 			 LocalDate dataLancamento,
-			 Double notaMedia, Categoria categoria) {
+			 Double notaMedia, ClassificacaoIndicativa classificacaoIndicativa , Categoria categoria) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -82,6 +88,7 @@ public class Filme {
 		this.duracao = duracao;
 		this.dataLancamento = dataLancamento;
 		this.notaMedia = notaMedia;
+		this.classificacaoIndicativa =  classificacaoIndicativa;
 		this.categoria = categoria;
 	}
 
@@ -143,6 +150,16 @@ public class Filme {
 
 	public void setNotaMedia(Double notaMedia) {
 		this.notaMedia = notaMedia;
+	}
+
+
+	public ClassificacaoIndicativa getClassificacaoIndicativa() {
+		return classificacaoIndicativa;
+	}
+
+
+	public void setClassificacaoIndicativa(ClassificacaoIndicativa classificacaoIndicativa) {
+		this.classificacaoIndicativa = classificacaoIndicativa;
 	}
 
 
