@@ -1,0 +1,70 @@
+package org.serratec.SerratecFlix.service;
+
+import org.serratec.SerratecFlix.domain.Serie;
+import org.serratec.SerratecFlix.dto.SerieRequestDTO;
+import org.serratec.SerratecFlix.dto.SerieResponseDTO;
+import org.serratec.SerratecFlix.repository.SerieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class SerieService {
+
+    @Autowired
+    private SerieRepository serieRepository;
+
+    // 1. Selecionar todas as séries
+    public List<SerieResponseDTO> listarTodos() {
+        return serieRepository.findAll().stream()
+                .map(SerieResponseDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    // 2. Buscar a série pelo ID
+    public SerieResponseDTO buscarPorId(Long id) {
+        Serie serie = serieRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Série não encontrada com ID: " + id));
+        return new SerieResponseDTO(serie);
+    }
+
+    // 3. Cadastrar serie
+    public SerieResponseDTO cadastrarSerie(SerieRequestDTO serieRequest) {
+        Serie serie = new Serie();
+        serie.setTituloSerie(serieRequest.getTituloSerie());
+        serie.setDescricaoSerie(serieRequest.getDescricaoSerie());
+        serie.setTemporadas(serieRequest.getTemporadas());
+        serie.setEpisodios(serieRequest.getEpisodios());
+        serie.setDataLancamento(serieRequest.getDataLancamento());
+
+        serieRepository.save(serie);
+
+        return new SerieResponseDTO(serie);
+    }
+
+    // 4. Atualizar série
+    public SerieResponseDTO atualizarSerie(Long id, SerieRequestDTO serieRequest) {
+        Serie serie = new Serie();
+
+        serie.setTituloSerie(serieRequest.getTituloSerie());
+        serie.setDescricaoSerie(serieRequest.getDescricaoSerie());
+        serie.setTemporadas(serieRequest.getTemporadas());
+        serie.setEpisodios(serieRequest.getEpisodios());
+        serie.setDataLancamento(serieRequest.getDataLancamento());
+        serie.setCategoria(serieRequest.getCategoria());
+
+        serieRepository.save(serie);
+
+        return new SerieResponseDTO(serie);
+    }
+
+    // 5. Deletar série
+    public void removerSerie (Long id) {
+        if(!serieRepository.existsById(id)) {
+            throw new RuntimeException("Série não encontrada com ID: " + id);
+        }
+        serieRepository.deleteById(id);
+    }
+}
