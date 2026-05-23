@@ -3,7 +3,6 @@ package org.serratec.SerratecFlix.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.serratec.SerratecFlix.domain.Serie;
 
-import javax.swing.*;
 import java.time.LocalDate;
 
 @Schema(description = "Modelo de dados para resposta da série")
@@ -35,5 +34,69 @@ public class SerieResponseDTO {
         this.dataLancamento = serie.getDataLancamento();
         this.notaMediaSerie = serie.getNotaMediaSerie();
         this.categoria = serie.getCategoria();
+    }
+
+    public Long getIdSerie() {
+        return idSerie;
+    }
+
+    public void setIdSerie(Long idSerie) {
+        this.idSerie = idSerie;
+    }
+
+    public String getTituloSerie() {
+        return tituloSerie;
+    }
+
+    public void setTituloSerie(String tituloSerie) {
+        this.tituloSerie = tituloSerie;
+    }
+
+    public String getDescricaoSerie() {
+        return descricaoSerie;
+    }
+
+    public void setDescricaoSerie(String descricaoSerie) {
+        this.descricaoSerie = descricaoSerie;
+    }
+
+    public Integer getTemporadas() {
+        return temporadas;
+    }
+
+    public void setTemporadas(Integer temporadas) {
+        this.temporadas = temporadas;
+    }
+
+    public Integer getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(Integer episodios) {
+        this.episodios = episodios;
+    }
+
+    public LocalDate getDataLancamento() {
+        return dataLancamento;
+    }
+
+    public void setDataLancamento(LocalDate dataLancamento) {
+        this.dataLancamento = dataLancamento;
+    }
+
+    public Double getNotaMediaSerie() {
+        return notaMediaSerie;
+    }
+
+    public void setNotaMediaSerie(Double notaMediaSerie) {
+        this.notaMediaSerie = notaMediaSerie;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
