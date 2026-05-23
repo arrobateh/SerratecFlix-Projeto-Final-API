@@ -1,7 +1,6 @@
 package org.serratec.SerratecFlix.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
@@ -31,7 +30,7 @@ public class SerieRequestDTO {
 
     @NotBlank(message = "A categoria da serie é obrigatória")
     @Schema(description = "A categoria da série", example = "Suspense", required = true)
-    private Categoria categoria;
+    private int categoria;
 
     @Past(message = "A data de lançamento deve ser uma data passada")
     @Schema(description = "A data de lançamento da série", example = "2016-07-15", required = true)
@@ -48,7 +47,6 @@ public class SerieRequestDTO {
         this.episodios = episodios;
         this.dataLancamento = dataLancamento;
         this.categoria = categoria.getNome();
-
     }
 
     public String getTituloSerie() {
