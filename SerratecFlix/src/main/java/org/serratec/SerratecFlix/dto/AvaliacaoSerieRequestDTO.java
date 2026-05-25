@@ -14,7 +14,7 @@ public class AvaliacaoSerieRequestDTO {
     @Schema(description = "A nota da série", example = "8.5", required = true)
     private Double notaSerie;
 
-    @Schema(description = "O comentário da série", example = "Muito bom!", required = true")
+    @Schema(description = "O comentário da série", example = "Muito bom!", required = true)
     private String comentarioSerie;
 
     public AvaliacaoSerieRequestDTO() {
