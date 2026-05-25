@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "serie")
@@ -48,6 +49,9 @@ public class Serie {
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
+    @OneToMany(mappedBy = "serie")
+    private List<AvaliacaoSerie> avaliacoes;
+
     public Serie () {
 
     }
@@ -58,7 +62,7 @@ public class Serie {
                  Integer episodios,
                  LocalDate dataLancamento,
                  Double notaMediaSerie,
-                 String categoria) {
+                 Categoria categoria) {
 
         this.idSerie = idSerie;
         this.tituloSerie = tituloSerie;
@@ -67,7 +71,7 @@ public class Serie {
         this.episodios = episodios;
         this.dataLancamento = dataLancamento;
         this.notaMediaSerie = notaMediaSerie;
-        this.categoria = categoria.getNome();
+        this.categoria = categoria;
     }
 
     public Long getIdSerie() {
@@ -132,5 +136,13 @@ public class Serie {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public List<AvaliacaoSerie> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<AvaliacaoSerie> avaliacoes) {
+        this.avaliacoes = avaliacoes;
     }
 }

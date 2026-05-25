@@ -28,9 +28,9 @@ public class SerieRequestDTO {
     @Schema(description = "O número de episódios da série", example = "34", required = true)
     private Integer episodios;
 
-    @NotBlank(message = "A categoria da serie é obrigatória")
+    @NotNull(message = "A categoria da serie é obrigatória")
     @Schema(description = "A categoria da série", example = "Suspense", required = true)
-    private int categoria;
+    private Long idCategoria;
 
     @Past(message = "A data de lançamento deve ser uma data passada")
     @Schema(description = "A data de lançamento da série", example = "2016-07-15", required = true)
@@ -40,13 +40,18 @@ public class SerieRequestDTO {
 
     }
 
-    public SerieRequestDTO(String tituloSerie, String descricaoSerie, Integer temporadas, Integer episodios, LocalDate dataLancamento) {
+    public SerieRequestDTO(String tituloSerie,
+                           String descricaoSerie,
+                           Integer temporadas,
+                           Integer episodios,
+                           LocalDate dataLancamento,
+                           Long idCategoria) {
         this.tituloSerie = tituloSerie;
         this.descricaoSerie = descricaoSerie;
         this.temporadas = temporadas;
         this.episodios = episodios;
         this.dataLancamento = dataLancamento;
-        this.categoria = categoria.getNome();
+        this.idCategoria = idCategoria;
     }
 
     public String getTituloSerie() {
@@ -89,11 +94,12 @@ public class SerieRequestDTO {
         this.dataLancamento = dataLancamento;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Long getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setIdCategoria(Long idCategoria) {
+        this.idCategoria = idCategoria;
     }
+
 }
