@@ -44,34 +44,16 @@ public class Serie {
     @Column(name = "nota_media_serie")
     private Double notaMediaSerie;
 
-    @NotNull(message = "A categoria da serie é obrigatória")
-    @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
+//    @NotNull(message = "A categoria da serie é obrigatória")
+//    @ManyToOne
+//    @JoinColumn(name = "id_categoria")
+//    private Categoria categoria;
 
     @OneToMany(mappedBy = "serie")
     private List<AvaliacaoSerie> avaliacoes;
 
     public Serie () {
 
-    }
-    public Serie(Long idSerie,
-                 String tituloSerie,
-                 String descricaoSerie,
-                 Integer temporadas,
-                 Integer episodios,
-                 LocalDate dataLancamento,
-                 Double notaMediaSerie,
-                 Categoria categoria) {
-
-        this.idSerie = idSerie;
-        this.tituloSerie = tituloSerie;
-        this.descricaoSerie = descricaoSerie;
-        this.temporadas = temporadas;
-        this.episodios = episodios;
-        this.dataLancamento = dataLancamento;
-        this.notaMediaSerie = notaMediaSerie;
-        this.categoria = categoria;
     }
 
     public Long getIdSerie() {
@@ -130,13 +112,6 @@ public class Serie {
         this.notaMediaSerie = notaMediaSerie;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
 
     public List<AvaliacaoSerie> getAvaliacoes() {
         return avaliacoes;

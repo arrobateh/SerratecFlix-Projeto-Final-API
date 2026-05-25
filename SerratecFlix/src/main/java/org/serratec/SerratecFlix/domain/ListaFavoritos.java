@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "lista_favoritos")
@@ -27,6 +28,10 @@ public class ListaFavoritos {
     @JoinColumn(name = "id_usario")
     @JsonBackReference("usario-lista_favoritos")
     private Usuario usuario;
+
+    @ManyToMany
+    @JoinColumn(name = "id_series")
+    private List<Serie> series;
 
     public ListaFavoritos() {
     }
