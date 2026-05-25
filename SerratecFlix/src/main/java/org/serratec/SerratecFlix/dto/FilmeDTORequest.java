@@ -8,12 +8,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
+import org.serratec.SerratecFlix.domain.ClassificacaoIndicativa;
 
 public class FilmeDTORequest {
 	
 	
 	@NotBlank(message = "O titulo do filme é obrigatório")
-	@Size(max = 100, message = "O titulo do filme deve ter no máximo 40 caracteres")
+	@Size(max = 40, message = "O titulo do filme deve ter no máximo 40 caracteres")
 	@Schema(description = "Titulo do filme", example = "Vingadores: Ultimato")
 	private String titulo;
 	
@@ -40,20 +41,31 @@ public class FilmeDTORequest {
 	@NotNull(message = "A nota média do filme é obrigatória")
 	@Schema(description = "Nota média do filme", example = "8.5")
 	private Double notaMedia;
+    
+	@NotNull(message = "A classificação indicativa do filme é obrigatória")
+	@Schema(description = "Classificação indicativa do filme", example = "MAIORES_16")
+	private ClassificacaoIndicativa classificacaoIndicativa;
+
+	@NotNull(message = "O id da categoria é obrigatório")
+	@Schema(description = "Id da categoria do filme", example = "1")
+	private Long categoriaId;
 	
 	
 	public FilmeDTORequest() {
 		super();
 	}
-	
-	
-	public FilmeDTORequest(String titulo, String descricao, Integer duracao, LocalDate dataLancamento, Double notaMedia) {
+
+
+	public FilmeDTORequest(String titulo, String descricao, Integer duracao, LocalDate dataLancamento, Double notaMedia,
+			ClassificacaoIndicativa classificacaoIndicativa, Long categoriaId) {
 		super();
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.duracao = duracao;
 		this.dataLancamento = dataLancamento;
 		this.notaMedia = notaMedia;
+		this.classificacaoIndicativa = classificacaoIndicativa;
+		this.categoriaId = categoriaId;
 	}
 
 
@@ -104,6 +116,26 @@ public class FilmeDTORequest {
 
 	public void setNotaMedia(Double notaMedia) {
 		this.notaMedia = notaMedia;
+	}
+
+
+	public ClassificacaoIndicativa getClassificacaoIndicativa() {
+		return classificacaoIndicativa;
+	}
+
+
+	public void setClassificacaoIndicativa(ClassificacaoIndicativa classificacaoIndicativa) {
+		this.classificacaoIndicativa = classificacaoIndicativa;
+	}
+
+
+	public Long getCategoriaId() {
+		return categoriaId;
+	}
+
+
+	public void setCategoriaId(Long categoriaId) {
+		this.categoriaId = categoriaId;
 	}
 
 }

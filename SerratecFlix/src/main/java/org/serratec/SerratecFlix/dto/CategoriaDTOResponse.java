@@ -9,7 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 public class CategoriaDTOResponse {
 	
-	@Schema(description = "Identificador único da categoria", example = "1")
+	@Schema(description = "ID da categoria", example = "1")
 	private Long id;
 	
 	@Schema(description = "Nome da categoria", example = "Ação")

@@ -1,6 +1,9 @@
 package org.serratec.SerratecFlix.dto;
 
 import java.time.LocalDate;
+import java.util.Set;
+
+import org.serratec.SerratecFlix.domain.ClassificacaoIndicativa;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -12,7 +15,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 	"descricao",
 	"duracao",
 	"dataLancamento",
-	"notaMedia"
+	"notaMedia",
+	"classificacaoIndicativa",
+	"categorias"
 })
 
 
@@ -36,6 +41,14 @@ public class FilmeDTOResponse {
 	
 	@Schema(description = "Nota média do filme", example = "9.2")
 	 private Double notaMedia;
+	
+	@Schema(description = "Classificação indicativa do filme", example = "+18")
+	 private ClassificacaoIndicativa classificacaoIndicativa;
+	
+	@Schema(description = "Categoria do filme", example = "Romance")
+	 private Set<String> categorias;
+	
+	
 	 
 	public FilmeDTOResponse() {
 		super();
@@ -44,7 +57,7 @@ public class FilmeDTOResponse {
 	
 	
 	public FilmeDTOResponse(Long id, String titulo, String descricao, Integer duracao, LocalDate dataLancamento,
-			Double notaMedia) {
+			Double notaMedia, ClassificacaoIndicativa classificacaoIndicativa, Set<String> categorias) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -52,6 +65,8 @@ public class FilmeDTOResponse {
 		this.duracao = duracao;
 		this.dataLancamento = dataLancamento;
 		this.notaMedia = notaMedia;
+		this.classificacaoIndicativa = classificacaoIndicativa;
+		this.categorias = categorias;
 	}
 
 
@@ -125,7 +140,29 @@ public class FilmeDTOResponse {
 	public void setNotaMedia(Double notaMedia) {
 		this.notaMedia = notaMedia;
 	}
-	
-	
 
+
+
+	public ClassificacaoIndicativa getClassificacaoIndicativa() {
+		return classificacaoIndicativa;
+	}
+
+
+
+	public void setClassificacaoIndicativa(ClassificacaoIndicativa classificacaoIndicativa) {
+		this.classificacaoIndicativa = classificacaoIndicativa;
+	}
+
+
+
+	public Set<String> getCategorias() {
+		return categorias;
+	}
+
+
+
+	public void setCategorias(Set<String> categorias) {
+		this.categorias = categorias;
+	}
+	
 }

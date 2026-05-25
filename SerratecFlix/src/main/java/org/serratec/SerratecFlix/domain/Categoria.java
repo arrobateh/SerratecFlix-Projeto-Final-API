@@ -1,17 +1,16 @@
 package org.serratec.SerratecFlix.domain;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -25,7 +24,7 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "nome", nullable = false, length = 40)
+	@Column(name = "nome", nullable = false, length = 40, unique = true)
 	@NotBlank(message = "O nome da categoria é obrigatório")
 	@Size(max = 40, message = "O nome da categoria deve ter no máximo 40 caracteres")
 	private String nome;
@@ -36,17 +35,12 @@ public class Categoria {
 	@Size(max = 200, message = "A descrição da categoria deve ter no máximo 200 caracteres")
 	private String descricao;
 	
-
-	@JsonManagedReference
-	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-	@Schema(description = "Lista de filmes associados à categoria")
-	private List<Filme> filme;
+	@JsonIgnore
+	@ManyToMany(mappedBy = "categorias")
+	private Set<Filme> filmes = new HashSet<>();
 	
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
-	@Schema(description = "Lista de séries associadas à categoria")
-	private  List<Serie> serie;
+	
 
 	public Categoria() {
 		super();
@@ -55,11 +49,12 @@ public class Categoria {
 
 	public Categoria(Long id,
 			 String nome,
-		 String descricao) {
+		 String descricao, Set<Filme> filmes) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
+		this.filmes = filmes;
 	}
 
 
@@ -93,24 +88,13 @@ public class Categoria {
 	}
 
 
-	public List<Filme> getFilme() {
-		return filme;
+	public Set<Filme> getFilmes() {
+		return filmes;
 	}
 
 
-	public void setFilme(List<Filme> filme) {
-		this.filme = filme;
+	public void setFilmes(Set<Filme> filmes) {
+		this.filmes = filmes;
 	}
 
-
-	public List<Serie> getSerie() {
-		return serie;
-	}
-
-
-	public void setSerie(List<Serie> serie) {
-		this.serie = serie;
-	}
-	
-	
 }

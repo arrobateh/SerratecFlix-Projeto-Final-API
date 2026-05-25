@@ -1,10 +1,9 @@
 package org.serratec.SerratecFlix.domain;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,7 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -32,7 +32,7 @@ public class Filme {
 	
 	@Column(name = "titulo", nullable = false, length = 40, unique = true)
 	@NotBlank(message = "O titulo do filme é obrigatório")
-	@Size(max = 100, message = "O titulo do filme deve ter no máximo 40 caracteres")
+	@Size(max = 40, message = "O titulo do filme deve ter no máximo 40 caracteres")
 	private String titulo;
 	
 	
@@ -61,12 +61,14 @@ public class Filme {
 	@Column(name = "classificacao_indicativa", nullable = false)
 	private ClassificacaoIndicativa classificacaoIndicativa;
 
-	@JsonBackReference
-	@ManyToOne
-	@Schema(description = "Categoria do filme")
-	@JoinColumn(name = "categoria_id", nullable = false)
-	private Categoria categoria;
-
+	
+	@ManyToMany
+	@JoinTable
+		( name = "filme_categoria", 
+		joinColumns = @JoinColumn(name = "filme_id"),
+		inverseJoinColumns = @JoinColumn(name = "categoria_id")
+	)
+	private Set<Categoria> categorias = new HashSet<>();
 	
 		
 	
@@ -80,7 +82,7 @@ public class Filme {
 			 String descricao,
 			 Integer duracao,
 			 LocalDate dataLancamento,
-			 Double notaMedia, ClassificacaoIndicativa classificacaoIndicativa , Categoria categoria) {
+			 Double notaMedia, ClassificacaoIndicativa classificacaoIndicativa , Set<Categoria> categorias) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -89,7 +91,7 @@ public class Filme {
 		this.dataLancamento = dataLancamento;
 		this.notaMedia = notaMedia;
 		this.classificacaoIndicativa =  classificacaoIndicativa;
-		this.categoria = categoria;
+		this.categorias = categorias;
 	}
 
 
@@ -163,17 +165,12 @@ public class Filme {
 	}
 
 
-	public Categoria getCategoria() {
-		return categoria;
+	public Set<Categoria> getCategorias() {
+		return categorias;
 	}
 
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setCategorias(Set<Categoria> categorias) {
+		this.categorias = categorias;
 	}
-	
-	
-	
-	
-	
 }

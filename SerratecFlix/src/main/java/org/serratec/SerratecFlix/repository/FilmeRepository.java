@@ -12,7 +12,7 @@ public interface FilmeRepository extends JpaRepository<Filme, Long> {
 	
 	List<Filme> findByClassificacaoIndicativa(ClassificacaoIndicativa classificacao);
 
-	List<Filme> findByCategoria_Id(Long categoriaId);
+	List<Filme> findByCategorias_Id(Long categoriaId);
 
 
 }
