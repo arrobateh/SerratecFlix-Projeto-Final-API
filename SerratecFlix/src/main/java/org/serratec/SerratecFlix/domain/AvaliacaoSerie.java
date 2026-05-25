@@ -11,40 +11,44 @@ public class AvaliacaoSerie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_avaliacao_serie")
-    private Long idSerie;
+    private Long idAvaliacaoSerie;
 
     @Column(name = "nota")
-    private Double notaSerie;
+    private Double notaAvaliacaoSerie;
 
     @Column(name = "comentario")
     private String comentario;
 
     @Column(name = "data_avaliacao")
-    private LocalDate dataAvaliacao = LocalDate.now();
+    private LocalDate dataAvaliacaoSerie = LocalDate.now();
+
+    @ManyToOne
+   @JoinColumn(name = "id_serie")
+    private Serie serie;
 
     public AvaliacaoSerie(){}
 
     public AvaliacaoSerie(Long idSerie, Double nota, String comentario, LocalDate dataAvaliacao) {
-        this.idSerie = idSerie;
-        this.notaSerie = nota;
+        this.idAvaliacaoSerie = idSerie;
+        this.notaAvaliacaoSerie = nota;
         this.comentario = comentario;
-        this.dataAvaliacao = dataAvaliacao;
+        this.dataAvaliacaoSerie = dataAvaliacao;
     }
 
-    public Long getIdSerie() {
-        return idSerie;
+    public Long getIdAvaliacaoSerie() {
+        return idAvaliacaoSerie;
     }
 
-    public void setIdSerie(Long idSerie) {
-        this.idSerie = idSerie;
+    public void setIdAvaliacaoSerie(Long idAvaliacaoSerie) {
+        this.idAvaliacaoSerie = idAvaliacaoSerie;
     }
 
-    public Double getNotaSerie() {
-        return notaSerie;
+    public Double getNotaAvaliacaoSerie() {
+        return notaAvaliacaoSerie;
     }
 
-    public void setNotaSerie(Double nota) {
-        this.notaSerie = nota;
+    public void setNotaAvaliacaoSerie(Double notaAvaliacaoSerie) {
+        this.notaAvaliacaoSerie = notaAvaliacaoSerie;
     }
 
     public String getComentario() {
@@ -55,11 +59,19 @@ public class AvaliacaoSerie {
         this.comentario = comentario;
     }
 
-    public LocalDate getDataAvaliacao() {
-        return dataAvaliacao;
+    public LocalDate getDataAvaliacaoSerie() {
+        return dataAvaliacaoSerie;
     }
 
-    public void setDataAvaliacao(LocalDate dataAvaliacao) {
-        this.dataAvaliacao = dataAvaliacao;
+    public void setDataAvaliacaoSerie(LocalDate dataAvaliacaoSerie) {
+        this.dataAvaliacaoSerie = dataAvaliacaoSerie;
+    }
+
+    public Serie getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
     }
 }

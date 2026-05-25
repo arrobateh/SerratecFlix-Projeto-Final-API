@@ -8,6 +8,10 @@ import jakarta.validation.constraints.NotNull;
 @Schema(description = "Modelo de dados para cadastro de uma nova avaliacao de serie")
 public class AvaliacaoSerieRequestDTO {
 
+    @NotNull(message = "O ID da série é obrigatório")
+    @Schema(description = "O ID da série", example = "1", required = true)
+    private Long idSerie;
+
     @NotNull(message = "A nota da série é obrigatória. Valores aceitos entre 0.0 e 10.0")
     @Min(value = 0, message = "A nota da série deve ser maior ou igual a 0.0")
     @Min(value = 10, message = "A nota da série deve ser menor ou igual a 10.0")
@@ -21,7 +25,8 @@ public class AvaliacaoSerieRequestDTO {
 
     }
 
-    public AvaliacaoSerieRequestDTO(Double notaSerie, String comentarioSerie) {
+    public AvaliacaoSerieRequestDTO(Long idSerie, Double notaSerie, String comentarioSerie) {
+        this.idSerie = idSerie;
         this.notaSerie = notaSerie;
         this.comentarioSerie = comentarioSerie;
     }
@@ -40,5 +45,13 @@ public class AvaliacaoSerieRequestDTO {
 
     public void setComentarioSerie(String comentarioSerie) {
         this.comentarioSerie = comentarioSerie;
+    }
+
+    public Long getIdSerie() {
+        return idSerie;
+    }
+
+    public void setIdSerie(Long idSerie) {
+        this.idSerie = idSerie;
     }
 }

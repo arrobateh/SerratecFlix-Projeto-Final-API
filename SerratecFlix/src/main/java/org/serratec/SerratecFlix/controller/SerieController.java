@@ -71,4 +71,18 @@ public class SerieController {
         SerieResponseDTO atualizar = serieService.atualizarSerie(id, serieRequest);
         return ResponseEntity.ok(atualizar);
     }
+
+    // 5. Remover série
+    @Operation(
+            summary = "Remover série",
+            description = "Remove uma série pelo ID"
+    )
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover (@PathVariable Long id) {
+        if(serieService.buscarPorId(id) == null) {
+            return ResponseEntity.notFound().build();
+        }
+        serieService.removerSerie(id);
+        return ResponseEntity.noContent().build();
+    }
 }

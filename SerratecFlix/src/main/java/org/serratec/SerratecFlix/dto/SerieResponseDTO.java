@@ -23,7 +23,7 @@ public class SerieResponseDTO {
     @Schema(description = "A nota média da série")
     private Double notaMediaSerie;
     @Schema(description = "A categoria da série")
-    private Categoria categoria;
+    private String nomeCategoria;
 
     public SerieResponseDTO(Serie serie) {
         this.idSerie = serie.getIdSerie();
@@ -33,7 +33,7 @@ public class SerieResponseDTO {
         this.episodios = serie.getEpisodios();
         this.dataLancamento = serie.getDataLancamento();
         this.notaMediaSerie = serie.getNotaMediaSerie();
-        this.categoria = serie.getCategoria();
+        this.nomeCategoria = serie.getCategoria() != null ? serie.getCategoria().getNome() : "Sem categoria vinculada";
     }
 
     public Long getIdSerie() {
@@ -92,11 +92,11 @@ public class SerieResponseDTO {
         this.notaMediaSerie = notaMediaSerie;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public String getNomeCategoria() {
+        return nomeCategoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setNomeCategoria(String nomeCategoria) {
+        this.nomeCategoria = nomeCategoria;
     }
 }
