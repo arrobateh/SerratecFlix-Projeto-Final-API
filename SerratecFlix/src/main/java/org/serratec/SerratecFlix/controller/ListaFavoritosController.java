@@ -36,7 +36,7 @@ public class ListaFavoritosController {
     @PostMapping
     @Operation(summary = "Cria uma lista")
     public ResponseEntity<ListaFavoritosResponseDto> save(@Valid @RequestBody ListaFavoritosRequestDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(listaFavoritosService.salvar(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(listaFavoritosService.criar(dto));
     }
 
     @PutMapping("/{id}")
