@@ -26,6 +26,11 @@ public class AvaliacaoSerie {
    @JoinColumn(name = "id_serie")
     private Serie serie;
 
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
+
     public AvaliacaoSerie(){}
 
     public AvaliacaoSerie(Long idSerie, Double nota, String comentario, LocalDate dataAvaliacao) {
@@ -73,5 +78,13 @@ public class AvaliacaoSerie {
 
     public void setSerie(Serie serie) {
         this.serie = serie;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

@@ -1,29 +1,50 @@
 package org.serratec.SerratecFlix.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.serratec.SerratecFlix.domain.Serie;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Schema(description = "Modelo de dados para resposta da série")
+@JsonPropertyOrder({"idSerie", "tituloSerie", "descricaoSerie", "temporadas", "episodios", "dataLancamento", "notaMediaSerie", "nomeCategoria", "avaliacoes"})
 public class SerieResponseDTO {
 
     @Schema(description = "O ID da série", example = "1")
+    @JsonProperty("ID da serie")
     private Long idSerie;
     @Schema(description = "O título da série")
+    @JsonProperty("Titulo da serie")
     private String tituloSerie;
     @Schema(description = "A descrição da série")
+    @JsonProperty("Descricao da serie")
     private String descricaoSerie;
     @Schema(description = "O número de temporadas da série")
+    @JsonProperty("Temporadas")
     private Integer temporadas;
     @Schema(description = "O número de episódios da série")
+    @JsonProperty("Episodios")
     private Integer episodios;
     @Schema(description = "A data de lançamento da série")
+    @JsonProperty("Data de lançamento")
     private LocalDate dataLancamento;
     @Schema(description = "A nota média da série")
+    @JsonProperty("Nota média")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.0")
     private Double notaMediaSerie;
     @Schema(description = "A categoria da série")
+    @JsonProperty("Categoria")
     private String nomeCategoria;
+    @Schema(description = "As avaliações da série")
+    @JsonProperty("Avaliações")
+    private List<String> avaliacoes;
 
     public SerieResponseDTO(Serie serie) {
         this.idSerie = serie.getIdSerie();
@@ -32,8 +53,21 @@ public class SerieResponseDTO {
         this.temporadas = serie.getTemporadas();
         this.episodios = serie.getEpisodios();
         this.dataLancamento = serie.getDataLancamento();
-        this.notaMediaSerie = serie.getNotaMediaSerie();
         this.nomeCategoria = serie.getCategoria() != null ? serie.getCategoria().getNome() : "Sem categoria vinculada";
+
+        if (serie.getNotaMediaSerie() != null) {
+            this.notaMediaSerie = BigDecimal.valueOf(serie.getNotaMediaSerie())
+                    .setScale(1, RoundingMode.HALF_UP)
+                    .doubleValue();
+        } else {
+            this.notaMediaSerie = 0.0;
+        }
+
+        if(serie.getAvaliacoes() != null) {
+            this.avaliacoes = serie.getAvaliacoes().stream()
+                    .map(a -> a.getUsuario().getNome() + " - " + a.getComentario())
+                    .collect(Collectors.toList());
+        }
     }
 
     public Long getIdSerie() {
@@ -98,5 +132,13 @@ public class SerieResponseDTO {
 
     public void setNomeCategoria(String nomeCategoria) {
         this.nomeCategoria = nomeCategoria;
+    }
+
+    public List<String> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<String> avaliacoes) {
+        this.avaliacoes = avaliacoes;
     }
 }

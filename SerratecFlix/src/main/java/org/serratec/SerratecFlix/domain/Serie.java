@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "serie")
 public class Serie {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_serie")
     private Long idSerie;
 
@@ -38,7 +38,6 @@ public class Serie {
     @Column(name = "data_lancamento")
     private LocalDate dataLancamento;
 
-    @NotNull(message = "A nota média da série é obrigatória")
     @DecimalMin(value = "5.0", inclusive = true, message = "A nota média deve ser no mínimo 5.0")
     @DecimalMax(value = "10.0", inclusive = true, message = "A nota média deve ser no máximo 10.0")
     @Column(name = "nota_media_serie")
@@ -54,6 +53,25 @@ public class Serie {
 
     public Serie () {
 
+    }
+    public Serie(Long idSerie,
+                 String tituloSerie,
+                 String descricaoSerie,
+                 Integer temporadas,
+                 Integer episodios,
+                 LocalDate dataLancamento,
+                 Double notaMediaSerie,
+                 Categoria categoria,
+                 List<AvaliacaoSerie> avaliacoes) {
+
+        this.idSerie = idSerie;
+        this.tituloSerie = tituloSerie;
+        this.descricaoSerie = descricaoSerie;
+        this.temporadas = temporadas;
+        this.episodios = episodios;
+        this.dataLancamento = dataLancamento;
+        this.notaMediaSerie = notaMediaSerie;
+        this.categoria = categoria;
     }
 
     public Long getIdSerie() {
@@ -120,4 +138,5 @@ public class Serie {
     public void setAvaliacoes(List<AvaliacaoSerie> avaliacoes) {
         this.avaliacoes = avaliacoes;
     }
+
 }
