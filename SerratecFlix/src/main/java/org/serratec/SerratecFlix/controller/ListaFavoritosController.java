@@ -7,6 +7,7 @@ import org.serratec.SerratecFlix.dto.ListaFavoritosRequestDto;
 import org.serratec.SerratecFlix.dto.ListaFavoritosResponseDto;
 import org.serratec.SerratecFlix.service.ListaFavoritosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,12 @@ public class ListaFavoritosController {
     @Operation(summary = "Busca lista por ID")
     public ResponseEntity<ListaFavoritosResponseDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(listaFavoritosService.findById(id));
+    }
+
+    @PostMapping
+    @Operation(summary = "Cria uma lista")
+    public ResponseEntity<ListaFavoritosResponseDto> save(@Valid @RequestBody ListaFavoritosRequestDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(listaFavoritosService.salvar(dto));
     }
 
     @PutMapping("/{id}")

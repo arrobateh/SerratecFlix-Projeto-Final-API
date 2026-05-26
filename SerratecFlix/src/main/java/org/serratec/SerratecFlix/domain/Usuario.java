@@ -28,6 +28,7 @@ public class Usuario {
     private String email;
 
     @NotBlank(message = "username dever ser preenchido")
+    @Column(nullable = false, unique = true)
     private String username;
 
     @NotBlank(message = "username dever ser preenchido")

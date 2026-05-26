@@ -75,4 +75,12 @@ public class ListaFavoritos {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public List<Serie> getSeries() {
+        return series;
+    }
+
+    public void setSeries(List<Serie> series) {
+        this.series = series;
+    }
 }

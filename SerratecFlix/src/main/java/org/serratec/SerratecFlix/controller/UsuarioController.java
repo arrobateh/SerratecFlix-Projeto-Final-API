@@ -7,6 +7,7 @@ import org.serratec.SerratecFlix.dto.UsuarioRequestDto;
 import org.serratec.SerratecFlix.dto.UsuarioResponseDto;
 import org.serratec.SerratecFlix.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,12 @@ public class UsuarioController {
     @Operation(summary = "Busca usuario por ID")
     public ResponseEntity<UsuarioResponseDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.findById(id));
+    }
+
+    @PostMapping
+    @Operation(summary = "Cadastra um novo usuario")
+    public ResponseEntity<UsuarioResponseDto> save(@Valid @RequestBody UsuarioRequestDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.salvar(dto));
     }
 
     @PutMapping("/{id}")

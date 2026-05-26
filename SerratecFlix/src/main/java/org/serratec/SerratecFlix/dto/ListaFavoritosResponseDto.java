@@ -10,7 +10,7 @@ public class ListaFavoritosResponseDto {
     @Schema(description = "ID da Lista", example = "1")
     private Long id;
 
-    @Schema(description = "Nome da lista", example = "Filmes e series para assistir com a namorada")
+    @Schema(description = "Nome da lista", example = "Favoritos")
     private String nomeLista;
 
     @Schema(description = "Lista privada", example = "privada")
