@@ -2,12 +2,10 @@ package org.serratec.SerratecFlix.service;
 
 import org.serratec.SerratecFlix.domain.AvaliacaoSerie;
 import org.serratec.SerratecFlix.domain.Serie;
-import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.AvaliacaoSerieRequestDTO;
 import org.serratec.SerratecFlix.dto.AvaliacaoSerieResponseDTO;
 import org.serratec.SerratecFlix.repository.AvaliacaoSerieRepository;
 import org.serratec.SerratecFlix.repository.SerieRepository;
-import org.serratec.SerratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,10 +40,10 @@ public class AvaliacaoSerieService {
     // 3. Cadastrar avaliação
     public AvaliacaoSerieResponseDTO cadastrarAvaliacao(AvaliacaoSerieRequestDTO avaliacaoSerieRequest) {
         Serie serie = serieRepository.findById(avaliacaoSerieRequest.getIdSerie())
-                .orElseThrow(() -> new RuntimeException("Série não encontrada com ID: " + avaliacaoSerieRequest.getIdSerie()));
+                .orElseThrow(() -> new org.serratec.serratecflix.exception.RecursoNaoEncontradoException("Série não encontrada com ID: " + avaliacaoSerieRequest.getIdSerie()));
 
         Usuario usuario = usuarioRepository.findById(avaliacaoSerieRequest.getNomeUsuario())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + avaliacaoSerieRequest.getNomeUsuario()));
+                .orElseThrow(() -> new org.serratec.serratecflix.exception.RecursoNaoEncontradoException("Usuário não encontrado com ID: " + avaliacaoSerieRequest.getNomeUsuario()));
 
         AvaliacaoSerie avaliacaoSerie = new AvaliacaoSerie();
         avaliacaoSerie.setNotaAvaliacaoSerie(avaliacaoSerieRequest.getNotaSerie());

@@ -4,7 +4,6 @@ package org.serratec.SerratecFlix.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Schema(description = "Modelo de dados para cadastro de uma nova avaliacao de serie")
@@ -69,5 +68,13 @@ public class AvaliacaoSerieRequestDTO {
 
     public void setNomeUsuario(Long nomeUsuario) {
         this.idNomeUsuario = nomeUsuario;
+    }
+
+    public Long getIdNomeUsuario() {
+        return idNomeUsuario;
+    }
+
+    public void setIdNomeUsuario(Long idNomeUsuario) {
+        this.idNomeUsuario = idNomeUsuario;
     }
 }
