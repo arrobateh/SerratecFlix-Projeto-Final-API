@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "serie")
 public class Serie {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_serie")
     private Long idSerie;
 
@@ -38,22 +40,45 @@ public class Serie {
     @Column(name = "data_lancamento")
     private LocalDate dataLancamento;
 
-    @NotNull(message = "A nota média da série é obrigatória")
     @DecimalMin(value = "5.0", inclusive = true, message = "A nota média deve ser no mínimo 5.0")
     @DecimalMax(value = "10.0", inclusive = true, message = "A nota média deve ser no máximo 10.0")
     @Column(name = "nota_media_serie")
     private Double notaMediaSerie;
 
-//    @NotNull(message = "A categoria da serie é obrigatória")
-//    @ManyToOne
-//    @JoinColumn(name = "id_categoria")
-//    private Categoria categoria;
+    @NotNull(message = "A categoria da serie é obrigatória")
+    @ManyToMany
+    @JoinTable(name = "serie_categoria", joinColumns = @JoinColumn(name = "id_serie"),
+            inverseJoinColumns = @JoinColumn(name = "id_categoria"))
+    private Set<Categoria> categorias = new HashSet<>();
 
     @OneToMany(mappedBy = "serie")
     private List<AvaliacaoSerie> avaliacoes;
 
+    @ManyToMany(mappedBy = "series")
+    private Set<ListaFavoritos> listaFavoritos = new HashSet<>();
+
     public Serie () {
 
+    }
+
+    public Serie(Long idSerie,
+                 String tituloSerie,
+                 String descricaoSerie,
+                 Integer temporadas,
+                 Integer episodios,
+                 LocalDate dataLancamento,
+                 Double notaMediaSerie,
+                 Set<Categoria> categorias,
+                 List<AvaliacaoSerie> avaliacoes) {
+        this.idSerie = idSerie;
+        this.tituloSerie = tituloSerie;
+        this.descricaoSerie = descricaoSerie;
+        this.temporadas = temporadas;
+        this.episodios = episodios;
+        this.dataLancamento = dataLancamento;
+        this.notaMediaSerie = notaMediaSerie;
+        this.categorias = categorias;
+        this.avaliacoes = avaliacoes;
     }
 
     public Long getIdSerie() {
@@ -119,5 +144,21 @@ public class Serie {
 
     public void setAvaliacoes(List<AvaliacaoSerie> avaliacoes) {
         this.avaliacoes = avaliacoes;
+    }
+
+    public Set<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(Set<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+    public Set<ListaFavoritos> getListaFavoritos() {
+        return listaFavoritos;
+    }
+
+    public void setListaFavoritos(Set<ListaFavoritos> listaFavoritos) {
+        this.listaFavoritos = listaFavoritos;
     }
 }

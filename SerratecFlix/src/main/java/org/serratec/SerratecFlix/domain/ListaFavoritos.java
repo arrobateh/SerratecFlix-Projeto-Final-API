@@ -33,6 +33,10 @@ public class ListaFavoritos {
     @JoinTable(name = "lista_series", joinColumns = @JoinColumn(name = "id_lista_favoritos"), inverseJoinColumns = @JoinColumn(name = "id_series"))
     private List<Serie> series;
 
+    @ManyToMany
+    @JoinTable(name = "lista_filmes", joinColumns = @JoinColumn(name = "id_lista_favoritos"), inverseJoinColumns = @JoinColumn(name = "id_filmes"))
+    private List<Filme> filmes;
+
     public ListaFavoritos() {
     }
 

@@ -1,9 +1,11 @@
 package org.serratec.SerratecFlix.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.serratec.SerratecFlix.domain.Categoria;
 import org.serratec.SerratecFlix.domain.Serie;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Schema(description = "Modelo de dados para resposta da série")
 public class SerieResponseDTO {
@@ -22,8 +24,8 @@ public class SerieResponseDTO {
     private LocalDate dataLancamento;
     @Schema(description = "A nota média da série")
     private Double notaMediaSerie;
-    @Schema(description = "A categoria da série")
-    private String nomeCategoria;
+    @Schema(description = "As categorias da série")
+    private List<String> categorias;
 
     public SerieResponseDTO(Serie serie) {
         this.idSerie = serie.getIdSerie();
@@ -33,7 +35,10 @@ public class SerieResponseDTO {
         this.episodios = serie.getEpisodios();
         this.dataLancamento = serie.getDataLancamento();
         this.notaMediaSerie = serie.getNotaMediaSerie();
-//        this.nomeCategoria = serie.getCategoria() != null ? serie.getCategoria().getNome() : "Sem categoria vinculada";
+        this.categorias = serie.getCategorias() != null ? serie.getCategorias()
+                                                          .stream()
+                                                          .map(Categoria::getNome)
+                                                          .toList() : List.of("Sem categoria vinculada");
     }
 
     public Long getIdSerie() {
@@ -92,11 +97,11 @@ public class SerieResponseDTO {
         this.notaMediaSerie = notaMediaSerie;
     }
 
-    public String getNomeCategoria() {
-        return nomeCategoria;
+    public List<String> getCategorias() {
+        return categorias;
     }
 
-    public void setNomeCategoria(String nomeCategoria) {
-        this.nomeCategoria = nomeCategoria;
+    public void setCategorias(List<String> categorias) {
+        this.categorias = categorias;
     }
 }
