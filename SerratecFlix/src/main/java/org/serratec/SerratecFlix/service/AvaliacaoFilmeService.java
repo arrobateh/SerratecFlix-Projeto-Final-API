@@ -8,6 +8,7 @@ import org.serratec.SerratecFlix.domain.AvaliacaoFilme;
 import org.serratec.SerratecFlix.domain.Filme;
 import org.serratec.SerratecFlix.dto.AvaliacaoFilmeDTORequest;
 import org.serratec.SerratecFlix.dto.AvaliacaoFilmeDTOResponse;
+import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
 import org.serratec.SerratecFlix.repository.AvaliacaoFilmeRepository;
 import org.serratec.SerratecFlix.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class AvaliacaoFilmeService {
 
     public AvaliacaoFilmeDTOResponse inserir(AvaliacaoFilmeDTORequest dto) {
         Filme filme = filmeRepository.findById(dto.getFilmeId())
-                .orElseThrow(() -> new RuntimeException("Filme não encontrado com id: " + dto.getFilmeId()));
+        		.orElseThrow(() -> new RecursoNaoEncontradoException("Filme não encontrado com id: " + dto.getFilmeId()));
 
         AvaliacaoFilme avaliacao = new AvaliacaoFilme();
         avaliacao.setNota(dto.getNota());
@@ -83,7 +84,7 @@ public class AvaliacaoFilmeService {
     
     public AvaliacaoFilmeDTOResponse atualizar(Long id, AvaliacaoFilmeDTORequest dto) {
         AvaliacaoFilme avaliacao = avaliacaoFilmeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Avaliação não encontrada com id: " + id));
+        		.orElseThrow(() -> new RecursoNaoEncontradoException("Avaliação não encontrada com id: " + id));
 
         avaliacao.setNota(dto.getNota());
         avaliacao.setComentario(dto.getComentario());
@@ -107,7 +108,7 @@ public class AvaliacaoFilmeService {
 
     public void deletar(Long id) {
         AvaliacaoFilme avaliacao = avaliacaoFilmeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Avaliação não encontrada com id: " + id));
+        		.orElseThrow(() -> new RecursoNaoEncontradoException("Avaliação não encontrada com id: " + id));
 
         Filme filme = avaliacao.getFilme();
         avaliacaoFilmeRepository.delete(avaliacao);

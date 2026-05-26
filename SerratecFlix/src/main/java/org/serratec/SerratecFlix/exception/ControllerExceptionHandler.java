@@ -1,4 +1,4 @@
-package org.serratec.serratecflix.exception;
+package org.serratec.SerratecFlix.exception;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
