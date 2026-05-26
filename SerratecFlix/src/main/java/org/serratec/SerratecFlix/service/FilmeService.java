@@ -1,7 +1,9 @@
 package org.serratec.SerratecFlix.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.serratec.SerratecFlix.domain.Categoria;
 import org.serratec.SerratecFlix.domain.Filme;
@@ -71,18 +73,19 @@ public class FilmeService {
     
     public FilmeDTOResponse inserir(FilmeDTORequest dto) {
 
-        Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
-
+    	Set<Categoria> categorias = new HashSet<>(categoriaRepository.findAllById(dto.getCategoriaIds()));
+    	if (categorias.isEmpty()) {
+    	    throw new RuntimeException("Nenhuma categoria encontrada");
+    	}
         Filme filme = new Filme();
+       
         filme.setTitulo(dto.getTitulo());
         filme.setDescricao(dto.getDescricao());
         filme.setDuracao(dto.getDuracao());
         filme.setDataLancamento(dto.getDataLancamento());
         filme.setNotaMedia(dto.getNotaMedia());
         filme.setClassificacaoIndicativa(dto.getClassificacaoIndicativa());
-
-        filme.getCategorias().add(categoria);
+        filme.setCategorias(categorias);
 
         filme = filmeRepository.save(filme);
 
@@ -106,12 +109,13 @@ public class FilmeService {
         Filme filme = filmeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Filme não encontrado com id: " + id));
         
-        Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
-
+        Set<Categoria> categorias = new HashSet<>(categoriaRepository.findAllById(dto.getCategoriaIds()));
+        if (categorias.isEmpty()) {
+            throw new RuntimeException("Nenhuma categoria encontrada");
+        }
         filme.getCategorias().clear();
-        filme.getCategorias().add(categoria);
-
+        filme.setCategorias(categorias);
+        
         filme.setTitulo(dto.getTitulo());
         filme.setDescricao(dto.getDescricao());
         filme.setDuracao(dto.getDuracao());
@@ -151,9 +155,6 @@ public class FilmeService {
                 .stream()
                 .map(Categoria::getNome)
                 .collect(java.util.stream.Collectors.toSet());
-    }
-    
-    
-    
+    } 
     
 }

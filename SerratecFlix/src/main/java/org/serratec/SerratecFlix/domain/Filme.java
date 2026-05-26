@@ -54,7 +54,6 @@ public class Filme {
 	private LocalDate dataLancamento;
 	
 	@Column(name = "nota_media")
-	@NotNull(message = "A nota média do filme é obrigatória")
 	private Double notaMedia;
 	
 	@Enumerated(EnumType.STRING) 
@@ -70,7 +69,7 @@ public class Filme {
 	)
 	private Set<Categoria> categorias = new HashSet<>();
 	
-		
+	private Set<ListaFavoritos> listaFavoritos = new HashSet<>();
 	
 	public Filme() {
 		super();
@@ -82,7 +81,8 @@ public class Filme {
 			 String descricao,
 			 Integer duracao,
 			 LocalDate dataLancamento,
-			 Double notaMedia, ClassificacaoIndicativa classificacaoIndicativa , Set<Categoria> categorias) {
+			 Double notaMedia, ClassificacaoIndicativa classificacaoIndicativa , Set<Categoria> categorias,
+			 Set<ListaFavoritos> listaFavoritos) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -92,6 +92,7 @@ public class Filme {
 		this.notaMedia = notaMedia;
 		this.classificacaoIndicativa =  classificacaoIndicativa;
 		this.categorias = categorias;
+		this.listaFavoritos = listaFavoritos;
 	}
 
 
@@ -172,5 +173,15 @@ public class Filme {
 
 	public void setCategorias(Set<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+
+	public Set<ListaFavoritos> getListaFavoritos() {
+		return listaFavoritos;
+	}
+
+
+	public void setListaFavoritos(Set<ListaFavoritos> listaFavoritos) {
+		this.listaFavoritos = listaFavoritos;
 	}
 }

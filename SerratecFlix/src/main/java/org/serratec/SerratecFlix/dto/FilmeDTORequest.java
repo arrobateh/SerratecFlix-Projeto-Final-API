@@ -1,14 +1,17 @@
 package org.serratec.SerratecFlix.dto;
 
 import java.time.LocalDate;
+import java.util.Set;
+
+import org.serratec.SerratecFlix.domain.ClassificacaoIndicativa;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
-import org.serratec.SerratecFlix.domain.ClassificacaoIndicativa;
 
 public class FilmeDTORequest {
 	
@@ -38,17 +41,16 @@ public class FilmeDTORequest {
 	private LocalDate dataLancamento;
 	
 	
-	@NotNull(message = "A nota média do filme é obrigatória")
-	@Schema(description = "Nota média do filme", example = "8.5")
+	@Schema(description = "Nota média do filme")
 	private Double notaMedia;
     
 	@NotNull(message = "A classificação indicativa do filme é obrigatória")
 	@Schema(description = "Classificação indicativa do filme", example = "MAIORES_16")
 	private ClassificacaoIndicativa classificacaoIndicativa;
 
-	@NotNull(message = "O id da categoria é obrigatório")
+	@NotEmpty(message = "Pelo menos uma categoria é obrigatória")
 	@Schema(description = "Id da categoria do filme", example = "1")
-	private Long categoriaId;
+	private Set<Long> categoriaIds;
 	
 	
 	public FilmeDTORequest() {
@@ -57,7 +59,7 @@ public class FilmeDTORequest {
 
 
 	public FilmeDTORequest(String titulo, String descricao, Integer duracao, LocalDate dataLancamento, Double notaMedia,
-			ClassificacaoIndicativa classificacaoIndicativa, Long categoriaId) {
+			ClassificacaoIndicativa classificacaoIndicativa, Set<Long> categoriaIds) {
 		super();
 		this.titulo = titulo;
 		this.descricao = descricao;
@@ -65,7 +67,7 @@ public class FilmeDTORequest {
 		this.dataLancamento = dataLancamento;
 		this.notaMedia = notaMedia;
 		this.classificacaoIndicativa = classificacaoIndicativa;
-		this.categoriaId = categoriaId;
+		this.categoriaIds = categoriaIds;
 	}
 
 
@@ -129,13 +131,13 @@ public class FilmeDTORequest {
 	}
 
 
-	public Long getCategoriaId() {
-		return categoriaId;
+	public Set<Long> getCategoriaIds() {
+		return categoriaIds;
 	}
 
 
-	public void setCategoriaId(Long categoriaId) {
-		this.categoriaId = categoriaId;
+	public void setCategoriaIds(Set<Long> categoriaIds) {
+		this.categoriaIds = categoriaIds;
 	}
 
 }

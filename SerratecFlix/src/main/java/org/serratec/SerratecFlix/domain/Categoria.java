@@ -39,6 +39,10 @@ public class Categoria {
 	@ManyToMany(mappedBy = "categorias")
 	private Set<Filme> filmes = new HashSet<>();
 	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "categorias")
+	private Set<Serie> series = new HashSet<>();
+	
 	
 	
 
@@ -49,12 +53,13 @@ public class Categoria {
 
 	public Categoria(Long id,
 			 String nome,
-		 String descricao, Set<Filme> filmes) {
+		 String descricao, Set<Filme> filmes, Set<Serie> series) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.filmes = filmes;
+		this.series = series;
 	}
 
 
@@ -97,4 +102,13 @@ public class Categoria {
 		this.filmes = filmes;
 	}
 
+
+	public Set<Serie> getSeries() {
+		return series;
+	}
+
+
+	public void setSeries(Set<Serie> series) {
+		this.series = series;
+	}
 }
