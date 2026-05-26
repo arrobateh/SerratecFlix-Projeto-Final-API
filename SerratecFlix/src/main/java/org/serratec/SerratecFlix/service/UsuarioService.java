@@ -1,8 +1,10 @@
 package org.serratec.SerratecFlix.service;
 
+import org.serratec.SerratecFlix.domain.Endereco;
 import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.UsuarioRequestDto;
 import org.serratec.SerratecFlix.dto.UsuarioResponseDto;
+import org.serratec.SerratecFlix.dto.ViaCepDto;
 import org.serratec.SerratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private ViaCepService viaCepService;
 
     public List<UsuarioResponseDto> listaUsuarios() {
         return usuarioRepository.findAll()
@@ -33,11 +38,27 @@ public class UsuarioService {
         if (usuarioRepository.existsByEmail(usuarioRequestDto.getEmail())) {
             throw new RuntimeException("Email já cadastrado");
         }
+
+        ViaCepDto viaCep = viaCepService.buscarViaCep(usuarioRequestDto.getCep());
+
+        Endereco endereco = new Endereco();
+
+        endereco.setCep(viaCep.getCep());
+        endereco.setLogradouro(viaCep.getLogradouro());
+        endereco.setBairro(viaCep.getBairro());
+        endereco.setCidade(viaCep.getCidade());
+        endereco.setUf(viaCep.getUf());
+
         Usuario usuario = new Usuario();
+
         usuario.setNome(usuarioRequestDto.getNome());
-        usuario.setSenha(usuarioRequestDto.getSenha());
         usuario.setEmail(usuarioRequestDto.getEmail());
         usuario.setUsername(usuarioRequestDto.getUsername());
+        usuario.setSenha(usuarioRequestDto.getSenha());
+
+        usuario.setEndereco(endereco);
+        endereco.setUsuario(usuario);
+
         return UsuarioResponseDto.from(usuarioRepository.save(usuario));
     }
 

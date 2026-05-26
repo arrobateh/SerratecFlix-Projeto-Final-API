@@ -16,8 +16,10 @@ public class UsuarioRequestDto {
     private String username;
 
     @NotBlank(message = "senha dever ser preenchida")
-    @Min(value = 8)
+    @Size(min = 8)
     private String senha;
+
+    private String cep;
 
     public String getNome() {
         return nome;
@@ -49,5 +51,13 @@ public class UsuarioRequestDto {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 }
