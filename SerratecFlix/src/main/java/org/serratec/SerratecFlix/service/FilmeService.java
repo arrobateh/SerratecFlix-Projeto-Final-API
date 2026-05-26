@@ -49,6 +49,26 @@ public class FilmeService {
         return filmesDTO;
     }
     
+
+    public List<FilmeDTOResponse> rankingFilmes() {
+        List<Filme> filmes = filmeRepository.findRankingFilmes();
+        List<FilmeDTOResponse> filmesDTO = new ArrayList<>();
+        for (Filme filme : filmes) {
+            FilmeDTOResponse dto = new FilmeDTOResponse();
+            dto.setId(filme.getId());
+            dto.setTitulo(filme.getTitulo());
+            dto.setDescricao(filme.getDescricao());
+            dto.setDuracao(filme.getDuracao());
+            dto.setDataLancamento(filme.getDataLancamento());
+            dto.setNotaMedia(filme.getNotaMedia());
+            dto.setClassificacaoIndicativa(filme.getClassificacaoIndicativa());
+            dto.setCategorias(mapCategorias(filme));
+            filmesDTO.add(dto);
+        }
+        return filmesDTO;
+    }
+    
+    
     public FilmeDTOResponse buscar(Long id) {
 
         Filme filme = filmeRepository.findById(id)
