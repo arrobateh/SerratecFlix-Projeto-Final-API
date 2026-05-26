@@ -40,6 +40,10 @@ public class Usuario {
     @JsonManagedReference("usario-lista_favoritos")
     private List<ListaFavoritos> favoritos = new ArrayList<>();
 
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonManagedReference("usuario-endereco")
+    private Endereco endereco;
+
     public Usuario() {
     }
 
@@ -97,5 +101,13 @@ public class Usuario {
 
     public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
