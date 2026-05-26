@@ -24,6 +24,12 @@ public class FilmeController {
     public List<FilmeDTOResponse> listar() {
         return filmeService.findAll();
     }
+    
+    @Operation(summary = "Ranking de filmes", description = "Retorna os filmes ordenados pela nota média do maior para o menor")
+    @GetMapping("/ranking")
+    public ResponseEntity<List<FilmeDTOResponse>> ranking() {
+        return ResponseEntity.ok(filmeService.rankingFilmes());
+    }
 
     @Operation(summary = "Buscar filme por ID", description = "Retorna os detalhes de um filme com base no ID fornecido")
     @GetMapping("/{id}")
