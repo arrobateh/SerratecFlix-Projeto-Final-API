@@ -3,6 +3,7 @@ package org.serratec.SerratecFlix.service;
 import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.UsuarioRequestDto;
 import org.serratec.SerratecFlix.dto.UsuarioResponseDto;
+import org.serratec.SerratecFlix.exception.ConflitoException;
 import org.serratec.SerratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,12 +32,13 @@ public class UsuarioService {
 
     public UsuarioResponseDto salvar(UsuarioRequestDto usuarioRequestDto) {
         if (usuarioRepository.existsByEmail(usuarioRequestDto.getEmail())) {
-            throw new RuntimeException("Email já cadastrado");
+            throw new ConflitoException("Email já cadastrado");
         }
         Usuario usuario = new Usuario();
         usuario.setNome(usuarioRequestDto.getNome());
         usuario.setSenha(usuarioRequestDto.getSenha());
         usuario.setEmail(usuarioRequestDto.getEmail());
+        usuario.setUsername(usuarioRequestDto.getUsername()); 
         return UsuarioResponseDto.from(usuarioRepository.save(usuario));
     }
 

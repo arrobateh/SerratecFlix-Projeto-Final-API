@@ -41,7 +41,7 @@ public class SerieResponseDTO {
     private Double notaMediaSerie;
     @Schema(description = "A categoria da série")
     @JsonProperty("Categoria")
-    private String nomeCategoria;
+    private List<String> categorias;
     @Schema(description = "As avaliações da série")
     @JsonProperty("Avaliações")
     private List<String> avaliacoes;
@@ -53,8 +53,9 @@ public class SerieResponseDTO {
         this.temporadas = serie.getTemporadas();
         this.episodios = serie.getEpisodios();
         this.dataLancamento = serie.getDataLancamento();
-        this.nomeCategoria = serie.getCategoria() != null ? serie.getCategoria().getNome() : "Sem categoria vinculada";
-
+        this.categorias = serie.getCategorias() != null && !serie.getCategorias().isEmpty()
+        	    ? serie.getCategorias().stream().map(c -> c.getNome()).collect(Collectors.toList())
+        	    : List.of("Sem categoria vinculada");
         if (serie.getNotaMediaSerie() != null) {
             this.notaMediaSerie = BigDecimal.valueOf(serie.getNotaMediaSerie())
                     .setScale(1, RoundingMode.HALF_UP)
@@ -126,15 +127,15 @@ public class SerieResponseDTO {
         this.notaMediaSerie = notaMediaSerie;
     }
 
-    public String getNomeCategoria() {
-        return nomeCategoria;
-    }
+    public List<String> getCategorias() {
+		return categorias;
+	}
 
-    public void setNomeCategoria(String nomeCategoria) {
-        this.nomeCategoria = nomeCategoria;
-    }
+	public void setCategorias(List<String> categorias) {
+		this.categorias = categorias;
+	}
 
-    public List<String> getAvaliacoes() {
+	public List<String> getAvaliacoes() {
         return avaliacoes;
     }
 
