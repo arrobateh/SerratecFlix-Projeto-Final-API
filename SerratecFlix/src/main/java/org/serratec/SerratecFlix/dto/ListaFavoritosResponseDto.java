@@ -1,14 +1,22 @@
 package org.serratec.SerratecFlix.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.serratec.SerratecFlix.domain.ListaFavoritos;
 
 import java.time.LocalDate;
 
 public class ListaFavoritosResponseDto {
 
+    @Schema(description = "ID da Lista", example = "1")
     private Long id;
+
+    @Schema(description = "Nome da lista", example = "Filmes e series para assistir com a namorada")
     private String nomeLista;
+
+    @Schema(description = "Lista privada", example = "privada")
     private Boolean privado = false;
+
+    @Schema(description = "Data de criacao da lista", example = "25-05-2026")
     private LocalDate dataCriacao;
 
     public static ListaFavoritosResponseDto from(ListaFavoritos favoritos) {
