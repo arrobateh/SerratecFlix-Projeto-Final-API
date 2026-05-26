@@ -23,7 +23,7 @@ public class AvaliacaoSerieResponseDTO {
         this.notaSerie = avaliacaoSerie.getNotaAvaliacaoSerie();
         this.comentarioSerie = avaliacaoSerie.getComentario();
         this.dataAvaliacao = avaliacaoSerie.getDataAvaliacaoSerie();
-        this.nomeSerie = avaliacaoSerie.getSerie().getTituloSerie();
+        this.nomeSerie = avaliacaoSerie.getSerie() != null ? avaliacaoSerie.getSerie().getTituloSerie() : null;
     }
 
     public Long getIdAvaliacaoSerie() {

@@ -41,8 +41,15 @@ public class AvaliacaoSerieService {
         AvaliacaoSerie avaliacaoSerie = new AvaliacaoSerie();
         avaliacaoSerie.setNotaAvaliacaoSerie(avaliacaoSerieRequest.getNotaSerie());
         avaliacaoSerie.setComentario(avaliacaoSerieRequest.getComentarioSerie());
+        avaliacaoSerie.setSerie(serie);
+
+        avaliacaoSerie.setSerie(serie);
 
         avaliacaoSerieRepository.save(avaliacaoSerie);
+
+        Double novaMedia = avaliacaoSerieRepository.calcularMediaNotaSerie(serie.getIdSerie());
+        serie.setNotaMediaSerie(novaMedia);
+        serieRepository.save(serie);
 
         return new AvaliacaoSerieResponseDTO(avaliacaoSerie);
     }

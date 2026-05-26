@@ -2,6 +2,7 @@ package org.serratec.SerratecFlix.dto;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
@@ -14,7 +15,7 @@ public class AvaliacaoSerieRequestDTO {
 
     @NotNull(message = "A nota da série é obrigatória. Valores aceitos entre 0.0 e 10.0")
     @Min(value = 0, message = "A nota da série deve ser maior ou igual a 0.0")
-    @Min(value = 10, message = "A nota da série deve ser menor ou igual a 10.0")
+    @Max(value = 10, message = "A nota da série deve ser menor ou igual a 10.0")
     @Schema(description = "A nota da série", example = "8.5", required = true)
     private Double notaSerie;
 
