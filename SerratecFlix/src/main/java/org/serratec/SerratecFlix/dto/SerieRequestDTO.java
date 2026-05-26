@@ -36,6 +36,9 @@ public class SerieRequestDTO {
     @Schema(description = "A data de lançamento da série", example = "2016-07-15", required = true)
     private LocalDate dataLancamento;
 
+    @Schema(description = "O nome do usuario que fez a avaliação")
+    private Long idUsuario;
+
     public SerieRequestDTO() {
 
     }
@@ -45,13 +48,15 @@ public class SerieRequestDTO {
                            Integer temporadas,
                            Integer episodios,
                            LocalDate dataLancamento,
-                           Long idCategoria) {
+                           Long idCategoria,
+                           Long idUsuario) {
         this.tituloSerie = tituloSerie;
         this.descricaoSerie = descricaoSerie;
         this.temporadas = temporadas;
         this.episodios = episodios;
         this.dataLancamento = dataLancamento;
         this.idCategoria = idCategoria;
+        this.idUsuario = idUsuario;
     }
 
     public String getTituloSerie() {
@@ -102,4 +107,11 @@ public class SerieRequestDTO {
         this.idCategoria = idCategoria;
     }
 
+    public Long getidUsuario() {
+        return idUsuario;
+    }
+
+    public void setidUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 }

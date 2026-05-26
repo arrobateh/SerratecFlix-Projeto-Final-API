@@ -18,24 +18,32 @@ import java.util.stream.Collectors;
 public class SerieResponseDTO {
 
     @Schema(description = "O ID da série", example = "1")
-    @JsonProperty("Serie")
+    @JsonProperty("ID da serie")
     private Long idSerie;
     @Schema(description = "O título da série")
+    @JsonProperty("Titulo da serie")
     private String tituloSerie;
     @Schema(description = "A descrição da série")
+    @JsonProperty("Descricao da serie")
     private String descricaoSerie;
     @Schema(description = "O número de temporadas da série")
+    @JsonProperty("Temporadas")
     private Integer temporadas;
     @Schema(description = "O número de episódios da série")
+    @JsonProperty("Episodios")
     private Integer episodios;
     @Schema(description = "A data de lançamento da série")
+    @JsonProperty("Data de lançamento")
     private LocalDate dataLancamento;
     @Schema(description = "A nota média da série")
+    @JsonProperty("Nota média")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.0")
     private Double notaMediaSerie;
     @Schema(description = "A categoria da série")
+    @JsonProperty("Categoria")
     private String nomeCategoria;
     @Schema(description = "As avaliações da série")
+    @JsonProperty("Avaliações")
     private List<String> avaliacoes;
 
     public SerieResponseDTO(Serie serie) {
@@ -57,7 +65,7 @@ public class SerieResponseDTO {
 
         if(serie.getAvaliacoes() != null) {
             this.avaliacoes = serie.getAvaliacoes().stream()
-                    .map(a -> a.getIdAvaliacaoSerie() + " - " + a.getComentario())
+                    .map(a -> a.getUsuario().getNome() + " - " + a.getComentario())
                     .collect(Collectors.toList());
         }
     }
