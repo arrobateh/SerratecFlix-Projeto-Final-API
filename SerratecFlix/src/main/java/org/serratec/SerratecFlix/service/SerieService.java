@@ -1,8 +1,10 @@
 package org.serratec.SerratecFlix.service;
 
+import org.serratec.SerratecFlix.domain.Categoria;
 import org.serratec.SerratecFlix.domain.Serie;
 import org.serratec.SerratecFlix.dto.SerieRequestDTO;
 import org.serratec.SerratecFlix.dto.SerieResponseDTO;
+import org.serratec.SerratecFlix.repository.CategoriaRepository;
 import org.serratec.SerratecFlix.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
