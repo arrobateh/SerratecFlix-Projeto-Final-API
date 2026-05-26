@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 
 public class UsuarioRequestDto {
 
-    @NotNull(message = "Nome dever ser preenchido")
+    @NotBlank(message = "Nome dever ser preenchido")
     @Size(min = 2, max = 50, message = "Nome deve ter entre 2 e 50 caracteres")
     private String nome;
 

@@ -1,10 +1,14 @@
 package org.serratec.SerratecFlix.service;
 
+import org.serratec.SerratecFlix.domain.Filme;
 import org.serratec.SerratecFlix.domain.ListaFavoritos;
+import org.serratec.SerratecFlix.domain.Serie;
 import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.ListaFavoritosRequestDto;
 import org.serratec.SerratecFlix.dto.ListaFavoritosResponseDto;
+import org.serratec.SerratecFlix.repository.FilmeRepository;
 import org.serratec.SerratecFlix.repository.ListaFavoritosRepository;
+import org.serratec.SerratecFlix.repository.SerieRepository;
 import org.serratec.SerratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,12 @@ public class ListaFavoritosService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private FilmeRepository filmeRepository;
+
+    @Autowired
+    private SerieRepository serieRepository;
 
     public List<ListaFavoritosResponseDto> findAll() {
         return listaFavoritosRepository.findAll()
@@ -41,9 +51,14 @@ public class ListaFavoritosService {
         if (listaFavoritosRepository.existsByNomeLista(listaFavoritosRequestDto.getNomeLista())) {
             throw new RuntimeException("Já existe uma lista com esse nome");
         }
+        List<Serie> series = serieRepository.findAllById(listaFavoritosRequestDto.getIdSerie());
+        List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequestDto.getIdFilme());
+
         ListaFavoritos listaFavoritos = new ListaFavoritos();
         listaFavoritos.setUsuario(usuario);
         listaFavoritos.setNomeLista(listaFavoritosRequestDto.getNomeLista());
+        listaFavoritos.setSeries(series);
+        listaFavoritos.setFilmes(filmes);
         return ListaFavoritosResponseDto.from(listaFavoritosRepository.save(listaFavoritos));
     }
 
@@ -54,8 +69,12 @@ public class ListaFavoritosService {
         if (listaFavoritosRepository.existsByNomeListaAndIdNot(listaFavoritosRequestDto.getNomeLista(), id)) {
             throw new RuntimeException("Já existe uma lista com esse nome");
         }
-        listaFavoritos.setNomeLista(listaFavoritosRequestDto.getNomeLista());
+        List<Serie> series = serieRepository.findAllById(listaFavoritosRequestDto.getIdSerie());
+        List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequestDto.getIdFilme());
 
+        listaFavoritos.setNomeLista(listaFavoritosRequestDto.getNomeLista());
+        listaFavoritos.setSeries(series);
+        listaFavoritos.setFilmes(filmes);
         return ListaFavoritosResponseDto.from(listaFavoritosRepository.save(listaFavoritos));
     }
 

@@ -37,6 +37,7 @@ public class UsuarioService {
         usuario.setNome(usuarioRequestDto.getNome());
         usuario.setSenha(usuarioRequestDto.getSenha());
         usuario.setEmail(usuarioRequestDto.getEmail());
+        usuario.setUsername(usuarioRequestDto.getUsername());
         return UsuarioResponseDto.from(usuarioRepository.save(usuario));
     }
 

@@ -35,7 +35,7 @@ public class UsuarioController {
 
     @PostMapping
     @Operation(summary = "Cadastra um novo usuario")
-    public ResponseEntity<UsuarioResponseDto> save(@Valid @RequestBody UsuarioRequestDto dto) {
+    public ResponseEntity<UsuarioResponseDto> salvar(@Valid @RequestBody UsuarioRequestDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.salvar(dto));
     }
 

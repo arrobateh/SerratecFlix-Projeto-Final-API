@@ -87,4 +87,12 @@ public class ListaFavoritos {
     public void setSeries(List<Serie> series) {
         this.series = series;
     }
+
+    public List<Filme> getFilmes() {
+        return filmes;
+    }
+
+    public void setFilmes(List<Filme> filmes) {
+        this.filmes = filmes;
+    }
 }

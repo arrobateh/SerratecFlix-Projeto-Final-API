@@ -27,7 +27,7 @@ public class Filme {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idFilme;
 	
 	
 	@Column(name = "titulo", nullable = false, length = 40, unique = true)
@@ -74,7 +74,7 @@ public class Filme {
 	}
 
 
-	public Filme(Long id,
+	public Filme(Long idFilme,
 			 String titulo,
 			 String descricao,
 			 Integer duracao,
@@ -82,7 +82,7 @@ public class Filme {
 			 Double notaMedia, ClassificacaoIndicativa classificacaoIndicativa , Set<Categoria> categorias,
 			 Set<ListaFavoritos> listaFavoritos) {
 		super();
-		this.id = id;
+		this.idFilme = idFilme;
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.duracao = duracao;
@@ -94,13 +94,13 @@ public class Filme {
 	}
 
 
-	public Long getId() {
-		return id;
+	public Long getIdFilme() {
+		return idFilme;
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdFilme(Long idFilme) {
+		this.idFilme = idFilme;
 	}
 
 

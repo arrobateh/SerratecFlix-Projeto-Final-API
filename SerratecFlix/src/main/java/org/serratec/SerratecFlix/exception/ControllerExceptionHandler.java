@@ -38,9 +38,9 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         return super.handleExceptionInternal(ex, erroResposta, headers, status, request);
     }
 
-    @ExceptionHandler(org.serratec.serratecflix.exception.RecursoNaoEncontradoException.class)
+    @ExceptionHandler(RecursoNaoEncontradoException.class)
     public ResponseEntity<ErroResposta> handleRecursoNaoEncontrado(
-            org.serratec.serratecflix.exception.RecursoNaoEncontradoException ex) {
+            RecursoNaoEncontradoException ex) {
 
         ErroResposta erroResposta = new ErroResposta(
                 HttpStatus.NOT_FOUND.value(),
