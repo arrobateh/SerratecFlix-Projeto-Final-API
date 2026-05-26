@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/listaFavoritos")
+@RequestMapping("/listaFavoritos")
 @Tag(name = "Lista de Favoritos", description = "Gerenciamento de Lista de Favoritos")
 public class ListaFavoritosController {
 

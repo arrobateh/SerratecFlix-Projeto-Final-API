@@ -18,10 +18,10 @@ public class ListaFavoritos {
     @NotBlank(message = "Nome dever ser preenchido")
     private String nomeLista;
 
-
+    @Column(name = "privado")
     private Boolean privado = false;
 
-
+    @Column(name = "data_criacao")
     private LocalDate dataCriacao;
 
     @ManyToOne
@@ -30,7 +30,7 @@ public class ListaFavoritos {
     private Usuario usuario;
 
     @ManyToMany
-    @JoinColumn(name = "id_series")
+    @JoinTable(name = "lista_series", joinColumns = @JoinColumn(name = "id_lista_favoritos"), inverseJoinColumns = @JoinColumn(name = "id_series"))
     private List<Serie> series;
 
     public ListaFavoritos() {

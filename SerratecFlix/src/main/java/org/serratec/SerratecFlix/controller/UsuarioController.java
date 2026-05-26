@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/usuarios")
-@Tag(name = "Usuraios", description = "Gerenciamento de usuarios")
+@RequestMapping("/usuarios")
+@Tag(name = "Usuarios", description = "Gerenciamento de usuarios")
 public class UsuarioController {
 
     @Autowired

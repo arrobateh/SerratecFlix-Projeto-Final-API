@@ -33,7 +33,7 @@ public class SerieResponseDTO {
         this.episodios = serie.getEpisodios();
         this.dataLancamento = serie.getDataLancamento();
         this.notaMediaSerie = serie.getNotaMediaSerie();
-        this.nomeCategoria = serie.getCategoria() != null ? serie.getCategoria().getNome() : "Sem categoria vinculada";
+//        this.nomeCategoria = serie.getCategoria() != null ? serie.getCategoria().getNome() : "Sem categoria vinculada";
     }
 
     public Long getIdSerie() {

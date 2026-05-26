@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,10 +19,12 @@ public class Usuario {
     private Long id;
 
     @NotBlank(message = "Nome dever ser preenchido")
+    @Size(min = 2, max = 50)
     private String nome;
 
-    @Email
+    @Email(message = "Email invalido")
     @NotBlank(message = "email dever ser preenchido")
+    @Column(nullable = false, unique = true)
     private String email;
 
     @NotBlank(message = "username dever ser preenchido")

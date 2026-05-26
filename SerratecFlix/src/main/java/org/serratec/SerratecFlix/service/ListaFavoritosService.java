@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ListaFavoritosService {
-
+    
     @Autowired
     private ListaFavoritosRepository listaFavoritosRepository;
 
