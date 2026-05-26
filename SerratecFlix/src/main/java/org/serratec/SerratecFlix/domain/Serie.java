@@ -1,5 +1,6 @@
 package org.serratec.SerratecFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -55,6 +56,7 @@ public class Serie {
     private List<AvaliacaoSerie> avaliacoes;
 
     @ManyToMany(mappedBy = "series")
+    @JsonIgnore
     private Set<ListaFavoritos> listaFavoritos = new HashSet<>();
 
     public Serie () {

@@ -22,7 +22,7 @@ public class ListaFavoritos {
     private Boolean privado = false;
 
     @Column(name = "data_criacao")
-    private LocalDate dataCriacao;
+    private LocalDate dataCriacao =  LocalDate.now();
 
     @ManyToOne
     @JoinColumn(name = "id_usario")

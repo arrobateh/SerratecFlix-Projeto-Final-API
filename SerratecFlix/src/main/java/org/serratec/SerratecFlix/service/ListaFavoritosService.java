@@ -13,6 +13,7 @@ import org.serratec.SerratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +58,7 @@ public class ListaFavoritosService {
         ListaFavoritos listaFavoritos = new ListaFavoritos();
         listaFavoritos.setUsuario(usuario);
         listaFavoritos.setNomeLista(listaFavoritosRequestDto.getNomeLista());
+        listaFavoritos.setDataCriacao(LocalDate.now());
         listaFavoritos.setSeries(series);
         listaFavoritos.setFilmes(filmes);
         return ListaFavoritosResponseDto.from(listaFavoritosRepository.save(listaFavoritos));
