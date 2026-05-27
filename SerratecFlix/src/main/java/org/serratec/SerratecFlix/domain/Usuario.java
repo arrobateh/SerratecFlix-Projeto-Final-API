@@ -21,13 +21,16 @@ public class Usuario implements UserDetails {
     private Long id;
 
     @NotBlank(message = "Nome dever ser preenchido")
+    @Size(min = 2, max = 50)
     private String nome;
 
-    @Email
+    @Email(message = "Email invalido")
     @NotBlank(message = "email dever ser preenchido")
+    @Column(nullable = false, unique = true)
     private String email;
 
     @NotBlank(message = "username dever ser preenchido")
+    @Column(nullable = false, unique = true)
     private String username;
 
     @NotBlank(message = "username dever ser preenchido")
@@ -127,5 +130,13 @@ public class Usuario implements UserDetails {
 
     public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

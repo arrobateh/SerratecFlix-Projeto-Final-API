@@ -42,14 +42,10 @@ public class Categoria {
 	@JsonIgnore
 	@ManyToMany(mappedBy = "categoria") // Retirei o ultimo "s"
 	private Set<Serie> series = new HashSet<>();
-	
-	
-	
 
 	public Categoria() {
 		super();
 	}
-
 
 	public Categoria(Long id,
 			 String nome,

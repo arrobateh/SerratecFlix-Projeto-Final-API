@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AvaliacaoFilmeRepository extends JpaRepository<AvaliacaoFilme, Long> {
 
-    List<AvaliacaoFilme> findByFilmeId(Long filmeId);
+    List<AvaliacaoFilme> findByFilmeIdFilme(Long filmeId);
 
     List<AvaliacaoFilme> findByUsuarioId(Long usuarioId);
 
