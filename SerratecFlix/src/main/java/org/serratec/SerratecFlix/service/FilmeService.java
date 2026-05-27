@@ -99,7 +99,7 @@ public class FilmeService {
         List<FilmeDTOResponse> filmesDTO = new ArrayList<>();
         for (Filme filme : filmes) {
             FilmeDTOResponse dto = new FilmeDTOResponse();
-            dto.setId(filme.getId());
+            dto.setIdFilme(filme.getIdFilme());
             dto.setTitulo(filme.getTitulo());
             dto.setDescricao(filme.getDescricao());
             dto.setDuracao(filme.getDuracao());

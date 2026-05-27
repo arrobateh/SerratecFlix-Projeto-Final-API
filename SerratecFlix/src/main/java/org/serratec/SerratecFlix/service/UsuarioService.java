@@ -4,6 +4,7 @@ import org.serratec.SerratecFlix.domain.Endereco;
 import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.UsuarioRequestDto;
 import org.serratec.SerratecFlix.dto.UsuarioResponseDto;
+import org.serratec.SerratecFlix.dto.ViaCepDto;
 import org.serratec.SerratecFlix.exception.ConflitoException;
 import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
 import org.serratec.SerratecFlix.repository.UsuarioRepository;
@@ -22,6 +23,8 @@ public class UsuarioService {
 
     @Autowired
     private BCryptPasswordEncoder encoder;
+    @Autowired
+    private ViaCepService viaCepService;
 
     public List<UsuarioResponseDto> listaUsuarios() {
         return usuarioRepository.findAll()
@@ -65,7 +68,7 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
         usuario.setNome(usuarioRequestDto.getNome());
         usuario.setSenha(usuarioRequestDto.getSenha());
-        usuario.setUsername(usuarioRequestDto.getUsername());
+        usuario.setUsername(usuarioRequestDto.getUsernameDomain());
         usuario.setEmail(usuarioRequestDto.getEmail());
         return UsuarioResponseDto.from(usuarioRepository.save(usuario));
     }
