@@ -7,7 +7,7 @@
 ## 🎯 Objetivo
 
 Desenvolver uma API RESTful completa, aplicando os conceitos estudados durante o curso.
-O projeto deverá seguir boas práticas de desenvolvimento backend, arquitetura em camadas, persistência de dados, autenticação, documentação e organização profissional do código.
+O projeto segue boas práticas de desenvolvimento backend, arquitetura em camadas, persistência de dados, autenticação, documentação e organização profissional do código.
 
 ---
 
@@ -63,7 +63,7 @@ O **SerratecFlix** é uma plataforma de streaming geek onde usuários podem aval
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/serratecflix.git
+git clone https://github.com/arrobateh/serratecflix.git
 cd serratecflix
 
 # Configure o banco em application.properties
