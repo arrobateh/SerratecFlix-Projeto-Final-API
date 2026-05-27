@@ -1,23 +1,20 @@
-<div align="center">
-
-### 🚀 PROJETO FINAL
-#### API RESTful com Spring Boot
-
 # 🎬 SerratecFlix
 
+## 🎯 Tema do Projeto
 
-</div>
+🚀 **PROJETO FINAL** — API RESTful com Spring Boot
 
 ---
 
-## 👥 Integrantes
+## 👥 Integrantes / 📋 Responsabilidades
 
-| 👤 Nome | 📋 Responsabilidades |
-|---|---|
-| 🧑‍💻 Bruno Vitor | Entidades Filme, Categoria e AvaliaçãoFilme com seus respectivos pacotes. Métodos adicionais de Ranking/filmes e listagem de filmes por categoria. Criação do README. |
-| 🧑‍💻 Igor Bryan | Entidades Usuario e ListaFavoritos com seus respectivos pacotes. Implementação da API externa ViaCep e histórico de filmes/séries assistidas do usuário. |
-| 🧑‍💻 Kenny Robert | Implementação do pacote exception e filtro de conteúdo nas avaliações do usuário. |
-| 🧑‍💻 Wallace Ildefonso | Entidades Série e AvaliacaoSerie com seus respectivos pacotes. Métodos adicionais de lista de avaliações na série, camada de segurança e desenvolvimento de uma página HTML para Séries. |
+🧑‍💻 **Bruno Vitor** — Entidades Filme, Categoria e AvaliaçãoFilme com seus respectivos pacotes. Métodos adicionais de Ranking/filmes e listagem de filmes por categoria. Criação do README.
+
+🧑‍💻 **Igor Bryan** — Entidades Usuario e ListaFavoritos com seus respectivos pacotes. Implementação da API externa ViaCep e histórico de filmes/séries assistidas do usuário.
+
+🧑‍💻 **Kenny Robert** — Implementação do pacote exception e filtro de conteúdo nas avaliações do usuário.
+
+🧑‍💻 **Wallace Ildefonso** — Entidades Série e AvaliacaoSerie com seus respectivos pacotes. Métodos adicionais de lista de avaliações na série, camada de segurança e desenvolvimento de uma página HTML para Séries.
 
 ---
 
@@ -30,23 +27,30 @@ O **SerratecFlix** é uma plataforma de streaming geek onde usuários podem aval
 ## 🛠️ Tecnologias
 
 ### Back-end
-| Tecnologia | Descrição |
-|---|---|
-| ☕ **Java** | Linguagem principal do projeto |
-| 🌱 **Spring Boot** | Framework para construção da API REST |
-| 🗄️ **Spring Data JPA** | Abstração de acesso a dados com repositórios |
-| 🔄 **Hibernate** | ORM para mapeamento objeto-relacional |
-| 🐘 **PostgreSQL** | Banco de dados relacional |
-| 📦 **Maven** | Gerenciador de dependências e build |
-| 📄 **Swagger / OpenAPI** | Documentação interativa da API |
-| 🔐 **Spring Security** | Controle de autenticação e autorização |
-| 🪙 **JWT** | Tokens de autenticação stateless |
-| ✅ **Bean Validation** | Validação de dados nas requisições |
+
+☕ **Java** — Linguagem principal do projeto
+
+🌱 **Spring Boot** — Framework para construção da API REST
+
+🗄️ **Spring Data JPA** — Abstração de acesso a dados com repositórios
+
+🔄 **Hibernate** — ORM para mapeamento objeto-relacional
+
+🐘 **PostgreSQL** — Banco de dados relacional
+
+📦 **Maven** — Gerenciador de dependências e build
+
+📄 **Swagger / OpenAPI** — Documentação interativa da API
+
+🔐 **Spring Security** — Controle de autenticação e autorização
+
+🪙 **JWT** — Tokens de autenticação stateless
+
+✅ **Bean Validation** — Validação de dados nas requisições
 
 ### Versionamento
-| Tecnologia | Descrição |
-|---|---|
-| 🐙 **Git / GitHub** | Controle de versão e colaboração em equipe |
+
+🐙 **Git / GitHub** — Controle de versão e colaboração em equipe
 
 ---
 
@@ -72,24 +76,55 @@ Acesse a documentação: `http://localhost:8080/swagger-ui.html`
 
 ## 🔗 Endpoints Principais
 
-| Método | Endpoint | Descrição |
-|---|---|---|
-| `POST` | `/auth/register` | Cadastro de usuário |
-| `POST` | `/auth/login` | Login / geração de token |
-| `GET` | `/filmes` | Lista todos os filmes |
-| `POST` | `/filmes` | Cadastra um novo filme |
-| `GET` | `/filmes/{id}` | Busca filme por ID |
-| `PUT` | `/filmes/{id}` | Atualiza um filme |
-| `DELETE` | `/filmes/{id}` | Remove um filme |
-| `GET` | `/filmes/categoria/{id}` | Lista filmes por categoria |
-| `GET` | `/series` | Lista todas as séries |
-| `POST` | `/series` | Cadastra uma nova série |
-| `GET` | `/series/{id}` | Busca série por ID |
-| `PUT` | `/series/{id}` | Atualiza uma série |
-| `DELETE` | `/series/{id}` | Remove uma série |
-| `GET` | `/categorias` | Lista todas as categorias |
-| `POST` | `/categorias` | Cadastra uma nova categoria |
-| `DELETE` | `/categorias/{id}` | Remove uma categoria |
+**🔐 Auth**
+
+`POST /auth/register` — Cadastro de usuário
+
+`POST /auth/login` — Login / geração de token
+
+**🎬 Filmes**
+
+`GET /filmes` — Lista todos os filmes
+
+`GET /filmes/{id}` — Busca por ID
+
+`POST /filmes` — Cadastra filme
+
+`PUT /filmes/{id}` — Atualiza filme
+
+`DELETE /filmes/{id}` — Remove filme
+
+`GET /filmes/categoria/{id}` — Lista por categoria
+
+**📺 Séries**
+
+`GET /series` — Lista todas as séries
+
+`GET /series/{id}` — Busca por ID
+
+`POST /series` — Cadastra série
+
+`PUT /series/{id}` — Atualiza série
+
+`DELETE /series/{id}` — Remove série
+
+**🗂️ Categorias**
+
+`GET /categorias` — Lista todas as categorias
+
+`POST /categorias` — Cadastra categoria
+
+`DELETE /categorias/{id}` — Remove categoria
+
+**👤 Usuários**
+
+`GET /usuarios` — Lista todos os usuários
+
+`GET /usuarios/{id}` — Busca por ID
+
+`PUT /usuarios/{id}` — Atualiza usuário
+
+`DELETE /usuarios/{id}` — Remove usuário
 
 > 🔑 Todos os endpoints (exceto `/auth/*`) exigem token JWT no header: `Authorization: Bearer {token}`
 
