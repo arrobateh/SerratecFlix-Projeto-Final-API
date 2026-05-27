@@ -63,7 +63,7 @@ O **SerratecFlix** é uma plataforma de streaming geek onde usuários podem aval
 
 ```bash
 # Clone o repositório
-git clone https:https://github.com/arrobateh/SerratecFlix-Projeto-Final-API.git
+git clone https://github.com/arrobateh/SerratecFlix-Projeto-Final-API.git
 cd serratecflix
 
 # Configure o banco em application.properties
