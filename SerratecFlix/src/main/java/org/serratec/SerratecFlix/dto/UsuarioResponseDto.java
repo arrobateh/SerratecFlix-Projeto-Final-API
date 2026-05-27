@@ -48,7 +48,7 @@ public class UsuarioResponseDto {
         return email;
     }
 
-    public String getUsername() {
+    public String getUsernameDomain() {
         return username;
     }
 

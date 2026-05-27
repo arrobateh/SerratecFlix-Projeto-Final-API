@@ -37,7 +37,7 @@ public class UsuarioRequestDto {
         this.email = email;
     }
 
-    public String getUsername() {
+    public String getUsernameDomain() {
         return username;
     }
 

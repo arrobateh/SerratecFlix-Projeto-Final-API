@@ -67,4 +67,10 @@ public class UsuarioController {
         usuarioService.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping // Adicionei o post
+    @Operation(summary = "Cadastra um novo usuario")
+    public ResponseEntity<UsuarioResponseDto> salvar(@Valid @RequestBody UsuarioRequestDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.salvar(dto));
+    }
 }
