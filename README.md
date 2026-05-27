@@ -4,7 +4,14 @@
 
 ---
 
-## 📖 Descrição
+## 🎯 Objetivo
+
+Desenvolver uma API RESTful completa, aplicando os conceitos estudados durante o curso.
+O projeto deverá seguir boas práticas de desenvolvimento backend, arquitetura em camadas, persistência de dados, autenticação, documentação e organização profissional do código.
+
+---
+
+## 📖 Tema Escolhido
 
 O **SerratecFlix** é uma plataforma de streaming geek onde usuários podem avaliar filmes, séries e animes, criar listas, favoritar conteúdos e acompanhar sua watchlist.
 
@@ -74,12 +81,6 @@ Acesse a documentação: `http://localhost:8080/swagger-ui.html`
 
 ## 🔗 Endpoints Principais
 
-**🔐 Auth**
-
-`POST /auth/register` — Cadastro de usuário
-
-`POST /auth/login` — Login / geração de token
-
 **🎬 Filmes**
 
 `GET /filmes` — Lista todos os filmes
@@ -124,13 +125,10 @@ Acesse a documentação: `http://localhost:8080/swagger-ui.html`
 
 `DELETE /usuarios/{id}` — Remove usuário
 
-> 🔑 Todos os endpoints (exceto `/auth/*`) exigem token JWT no header: `Authorization: Bearer {token}`
-
 ---
 
 ## 📌 Observações
 
-- Perfis de acesso: `USER` e `ADMIN`
 - Tabelas criadas automaticamente via Hibernate (`ddl-auto=update`)
 - Endpoints documentados e testáveis via Swagger
 
