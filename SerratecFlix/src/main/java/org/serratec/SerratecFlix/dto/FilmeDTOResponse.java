@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class FilmeDTOResponse {
 	
 	@Schema(description = "ID do filme", example = "1")
-	 private Long id;
+	 private Long idFilme;
 	 
 	@Schema(description = "Título do filme", example = "O Poderoso Chefão")
 	 private String titulo;
@@ -56,10 +56,10 @@ public class FilmeDTOResponse {
 	
 	
 	
-	public FilmeDTOResponse(Long id, String titulo, String descricao, Integer duracao, LocalDate dataLancamento,
-			Double notaMedia, ClassificacaoIndicativa classificacaoIndicativa, Set<String> categorias) {
+	public FilmeDTOResponse(Long idFilme, String titulo, String descricao, Integer duracao, LocalDate dataLancamento,
+	                        Double notaMedia, ClassificacaoIndicativa classificacaoIndicativa, Set<String> categorias) {
 		super();
-		this.id = id;
+		this.idFilme = idFilme;
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.duracao = duracao;
@@ -71,14 +71,14 @@ public class FilmeDTOResponse {
 
 
 
-	public Long getId() {
-		return id;
+	public Long getIdFilme() {
+		return idFilme;
 	}
 
 
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdFilme(Long idFilme) {
+		this.idFilme = idFilme;
 	}
 
 

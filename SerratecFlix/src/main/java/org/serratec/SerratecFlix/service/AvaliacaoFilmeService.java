@@ -37,7 +37,7 @@ public class AvaliacaoFilmeService {
             dto.setNota(avaliacao.getNota());
             dto.setComentario(avaliacao.getComentario());
             dto.setDataAvaliacao(avaliacao.getDataAvaliacao());
-            dto.setFilmeId(avaliacao.getFilme().getId());
+            dto.setFilmeId(avaliacao.getFilme().getIdFilme());
             dto.setFilmeTitulo(avaliacao.getFilme().getTitulo());
             dto.setNomeUsuario(avaliacao.getUsuario().getNome());
             avaliacoesDTO.add(dto);
@@ -45,8 +45,8 @@ public class AvaliacaoFilmeService {
         return avaliacoesDTO;
     }
 
-    public List<AvaliacaoFilmeDTOResponse> findByFilmeId(Long filmeId) {
-        List<AvaliacaoFilme> avaliacoes = avaliacaoFilmeRepository.findByFilmeId(filmeId);
+    public List<AvaliacaoFilmeDTOResponse> findByFilmeIdFilme(Long filmeId) {
+        List<AvaliacaoFilme> avaliacoes = avaliacaoFilmeRepository.findByFilmeIdFilme(filmeId);
         List<AvaliacaoFilmeDTOResponse> avaliacoesDTO = new ArrayList<>();
         for (AvaliacaoFilme avaliacao : avaliacoes) {
             AvaliacaoFilmeDTOResponse dto = new AvaliacaoFilmeDTOResponse();
@@ -54,7 +54,7 @@ public class AvaliacaoFilmeService {
             dto.setNota(avaliacao.getNota());
             dto.setComentario(avaliacao.getComentario());
             dto.setDataAvaliacao(avaliacao.getDataAvaliacao());
-            dto.setFilmeId(avaliacao.getFilme().getId());
+            dto.setFilmeId(avaliacao.getFilme().getIdFilme());
             dto.setFilmeTitulo(avaliacao.getFilme().getTitulo());
             dto.setNomeUsuario(avaliacao.getUsuario().getNome());
             avaliacoesDTO.add(dto);
@@ -79,7 +79,7 @@ public class AvaliacaoFilmeService {
         
         avaliacao = avaliacaoFilmeRepository.save(avaliacao);
 
-        Double media = avaliacaoFilmeRepository.calcularMediaNotasPorFilme(filme.getId());
+        Double media = avaliacaoFilmeRepository.calcularMediaNotasPorFilme(filme.getIdFilme());
         filme.setNotaMedia(media);
         filmeRepository.save(filme);
         
@@ -89,7 +89,7 @@ public class AvaliacaoFilmeService {
         response.setNota(avaliacao.getNota());
         response.setComentario(avaliacao.getComentario());
         response.setDataAvaliacao(avaliacao.getDataAvaliacao());
-        response.setFilmeId(filme.getId());
+        response.setFilmeId(filme.getIdFilme());
         response.setFilmeTitulo(filme.getTitulo());
         response.setNomeUsuario(avaliacao.getUsuario().getNome());
 
@@ -105,13 +105,13 @@ public class AvaliacaoFilmeService {
 
         avaliacao = avaliacaoFilmeRepository.save(avaliacao);
         
-        Double media = avaliacaoFilmeRepository.calcularMediaNotasPorFilme(avaliacao.getFilme().getId());
+        Double media = avaliacaoFilmeRepository.calcularMediaNotasPorFilme(avaliacao.getFilme().getIdFilme());
         avaliacao.getFilme().setNotaMedia(media);
         filmeRepository.save(avaliacao.getFilme());
 
         AvaliacaoFilmeDTOResponse response = new AvaliacaoFilmeDTOResponse();
         response.setId(avaliacao.getId());
-        response.setFilmeId(avaliacao.getFilme().getId());
+        response.setFilmeId(avaliacao.getFilme().getIdFilme());
         response.setFilmeTitulo(avaliacao.getFilme().getTitulo());
         response.setNota(avaliacao.getNota());
         response.setComentario(avaliacao.getComentario());
@@ -129,7 +129,7 @@ public class AvaliacaoFilmeService {
         avaliacaoFilmeRepository.delete(avaliacao);
 
      
-        Double media = avaliacaoFilmeRepository.calcularMediaNotasPorFilme(filme.getId());
+        Double media = avaliacaoFilmeRepository.calcularMediaNotasPorFilme(filme.getIdFilme());
         filme.setNotaMedia(media);
         filmeRepository.save(filme);
     }
