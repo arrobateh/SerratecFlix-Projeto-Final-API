@@ -9,5 +9,3 @@ public class ConteudoInapropiadoException extends RuntimeException {
         super(mensagem);
     }
 }
-
-.

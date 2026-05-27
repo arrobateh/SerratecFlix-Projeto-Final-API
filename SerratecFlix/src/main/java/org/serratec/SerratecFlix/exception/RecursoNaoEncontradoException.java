@@ -1,4 +1,4 @@
-package org.serratec.serratecflix.exception;
+package org.serratec.SerratecFlix.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -9,5 +9,3 @@ public class RecursoNaoEncontradoException extends RuntimeException {
         super(mensagem);
     }
 }
-
-.

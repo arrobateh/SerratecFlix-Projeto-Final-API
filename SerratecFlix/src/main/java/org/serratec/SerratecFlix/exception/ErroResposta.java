@@ -1,4 +1,4 @@
-package org.serratec.serratecflix.exception;
+package org.serratec.SerratecFlix.exception;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,5 +34,3 @@ public class ErroResposta {
     public List<String> getErros() { return erros; }
     public void setErros(List<String> erros) { this.erros = erros; }
 }
-
-.
