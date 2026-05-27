@@ -10,9 +10,6 @@ import org.serratec.SerratecFlix.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class SerieService {
 
@@ -48,7 +45,7 @@ public class SerieService {
         serie.setTemporadas(serieRequest.getTemporadas());
         serie.setEpisodios(serieRequest.getEpisodios());
         serie.setDataLancamento(serieRequest.getDataLancamento());
-        serie.setCategoria(categoria);
+        serie.setCategorias(new HashSet<>(Set.of(categoria)));
 
         serieRepository.save(serie);
 
@@ -60,14 +57,14 @@ public class SerieService {
         Categoria categoria = categoriaRepository.findById(serieRequest.getIdCategoria())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Categoria não encontrada com ID: " + serieRequest.getIdCategoria()));
 
-        Serie serie = new Serie();
-
+        Serie serie = serieRepository.findById(id).orElseThrow(() -> new RuntimeException("Série não encontrada com ID: " + id));
+        
         serie.setTituloSerie(serieRequest.getTituloSerie());
         serie.setDescricaoSerie(serieRequest.getDescricaoSerie());
         serie.setTemporadas(serieRequest.getTemporadas());
         serie.setEpisodios(serieRequest.getEpisodios());
         serie.setDataLancamento(serieRequest.getDataLancamento());
-        serie.setCategoria(categoria);
+        serie.setCategorias(new HashSet<>(Set.of(categoria)));
 
         serieRepository.save(serie);
 

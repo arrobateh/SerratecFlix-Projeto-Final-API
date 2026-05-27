@@ -1,9 +1,9 @@
-package org.serratec.SerratecFlix.exception; //Alterei o nome
+package org.serratec.SerratecFlix.exception;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class ErroResposta {
+public class ErroResposta extends RuntimeException {
 
     private Integer status;
     private String titulo;

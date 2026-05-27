@@ -29,7 +29,7 @@ public class AvaliacaoFilmeController {
     @Operation(summary = "Listar avaliações por filme")
     @GetMapping("/filme/{filmeId}")
     public ResponseEntity<List<AvaliacaoFilmeDTOResponse>> listarPorFilme(@PathVariable Long filmeId) {
-        return ResponseEntity.ok(avaliacaoFilmeService.findByFilmeId(filmeId));
+        return ResponseEntity.ok(avaliacaoFilmeService.findByFilmeIdFilme(filmeId));
     }
 
     @Operation(summary = "Inserir nova avaliação de filme")

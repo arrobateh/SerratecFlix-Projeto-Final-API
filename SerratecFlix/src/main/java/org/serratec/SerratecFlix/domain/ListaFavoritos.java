@@ -1,11 +1,20 @@
 package org.serratec.SerratecFlix.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-
 import java.time.LocalDate;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "lista_favoritos")
@@ -18,11 +27,11 @@ public class ListaFavoritos {
     @NotBlank(message = "Nome dever ser preenchido")
     private String nomeLista;
 
-
+    @Column(name = "privado")
     private Boolean privado = false;
 
-
-    private LocalDate dataCriacao;
+    @Column(name = "data_criacao")
+    private LocalDate dataCriacao =  LocalDate.now();
 
     @ManyToOne
     @JoinColumn(name = "id_usario")
@@ -30,12 +39,16 @@ public class ListaFavoritos {
     private Usuario usuario;
 
     @ManyToMany
-    @JoinTable(  // Alterei a anotação
-            name = "lista_favoritos_serie",
-            joinColumns = @JoinColumn(name = "id_lista_favoritos"),
-            inverseJoinColumns = @JoinColumn(name = "id_serie")
+    @JoinTable(
+        name = "lista_favoritos_serie",
+        joinColumns = @JoinColumn(name = "id_lista_favoritos"),
+        inverseJoinColumns = @JoinColumn(name = "id_serie")
     )
-    private List<Serie> serie; // Retirei o ultimo "s"
+    private List<Serie> series;
+
+    @ManyToMany
+    @JoinTable(name = "lista_filmes", joinColumns = @JoinColumn(name = "id_lista_favoritos"), inverseJoinColumns = @JoinColumn(name = "id_filmes"))
+    private List<Filme> filmes;
 
     public ListaFavoritos() {
     }
@@ -80,11 +93,20 @@ public class ListaFavoritos {
         this.usuario = usuario;
     }
 
-    public List<Serie> getSerie() { // Adicionei os get e set
-        return serie;
-    }
+	public List<Serie> getSeries() {
+		return series;
+	}
 
-    public void setSerie(List<Serie> serie) {
-        this.serie = serie;
-    }
+	public void setSeries(List<Serie> series) {
+		this.series = series;
+	}
+    
+    
+    
+    
+    
+    
 }
+
+
+

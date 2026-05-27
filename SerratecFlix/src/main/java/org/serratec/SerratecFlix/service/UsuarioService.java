@@ -1,5 +1,6 @@
 package org.serratec.SerratecFlix.service;
 
+import org.serratec.SerratecFlix.domain.Endereco;
 import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.UsuarioRequestDto;
 import org.serratec.SerratecFlix.dto.UsuarioResponseDto;
@@ -31,7 +32,7 @@ public class UsuarioService {
 
     public UsuarioResponseDto findById(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
         return UsuarioResponseDto.from(usuario);
     }
 
@@ -39,7 +40,19 @@ public class UsuarioService {
         if (usuarioRepository.existsByEmail(usuarioRequestDto.getEmail())) {
             throw new ConflitoException("Email já cadastrado");
         }
+
+        ViaCepDto viaCep = viaCepService.buscarViaCep(usuarioRequestDto.getCep());
+
+        Endereco endereco = new Endereco();
+
+        endereco.setCep(viaCep.getCep());
+        endereco.setLogradouro(viaCep.getLogradouro());
+        endereco.setBairro(viaCep.getBairro());
+        endereco.setCidade(viaCep.getCidade());
+        endereco.setUf(viaCep.getUf());
+
         Usuario usuario = new Usuario();
+
         usuario.setNome(usuarioRequestDto.getNome());
         String senhaCriptografada = encoder.encode(usuarioRequestDto.getSenha());
         usuario.setSenha(senhaCriptografada);

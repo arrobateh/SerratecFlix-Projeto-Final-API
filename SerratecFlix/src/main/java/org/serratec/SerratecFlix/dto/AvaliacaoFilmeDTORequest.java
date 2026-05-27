@@ -19,16 +19,21 @@ public class AvaliacaoFilmeDTORequest {
     @NotNull(message = "O id do filme é obrigatório")
     @Schema(description = "Id do filme", example = "1")
     private Long filmeId;
+    
+    @NotNull(message = "O id do usuário é obrigatório")
+    @Schema(description = "Id do usuário", example = "1")
+    private Long usuarioId;
 
     public AvaliacaoFilmeDTORequest() {
         super();
     }
 
-    public AvaliacaoFilmeDTORequest(Double nota, String comentario, Long filmeId) {
+    public AvaliacaoFilmeDTORequest(Double nota, String comentario, Long filmeId, Long usuarioId ) {
         super();
         this.nota = nota;
         this.comentario = comentario;
         this.filmeId = filmeId;
+        this.usuarioId = usuarioId;
     }
 
     public Double getNota() {
@@ -54,4 +59,14 @@ public class AvaliacaoFilmeDTORequest {
     public void setFilmeId(Long filmeId) {
         this.filmeId = filmeId;
     }
+
+	public Long getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(Long usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+    
+    
 }

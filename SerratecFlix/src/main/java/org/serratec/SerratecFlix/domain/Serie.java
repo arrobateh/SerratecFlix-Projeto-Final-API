@@ -1,10 +1,27 @@
 package org.serratec.SerratecFlix.domain;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "serie")
@@ -43,20 +60,25 @@ public class Serie {
     @Column(name = "nota_media_serie")
     private Double notaMediaSerie;
 
-    @NotNull(message = "A categoria da serie é obrigatória")
-    @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private Categoria categoria;
-
+    @ManyToMany
+    @JoinTable(
+        name = "serie_categoria",
+        joinColumns = @JoinColumn(name = "id_serie"),
+        inverseJoinColumns = @JoinColumn(name = "id_categoria")
+    )
+    private Set<Categoria> categorias = new HashSet<>();
+    
     @OneToMany(mappedBy = "serie")
     private List<AvaliacaoSerie> avaliacoes;
 
-    @ManyToMany(mappedBy = "serie")
-    private List<ListaFavoritos> listaFavoritos;
+    @ManyToMany(mappedBy = "series")
+    @JsonIgnore
+    private Set<ListaFavoritos> listaFavoritos = new HashSet<>();
 
     public Serie () {
 
     }
+
     public Serie(Long idSerie,
                  String tituloSerie,
                  String descricaoSerie,
@@ -64,9 +86,8 @@ public class Serie {
                  Integer episodios,
                  LocalDate dataLancamento,
                  Double notaMediaSerie,
-                 Categoria categoria,
+                 Set<Categoria> categorias,
                  List<AvaliacaoSerie> avaliacoes) {
-
         this.idSerie = idSerie;
         this.tituloSerie = tituloSerie;
         this.descricaoSerie = descricaoSerie;
@@ -74,7 +95,7 @@ public class Serie {
         this.episodios = episodios;
         this.dataLancamento = dataLancamento;
         this.notaMediaSerie = notaMediaSerie;
-        this.categoria = categoria;
+        this.categorias = categorias;
     }
 
     public Long getIdSerie() {
@@ -132,9 +153,15 @@ public class Serie {
     public void setNotaMediaSerie(Double notaMediaSerie) {
         this.notaMediaSerie = notaMediaSerie;
     }
+    
 
-
-    public List<AvaliacaoSerie> getAvaliacoes() {
+    public Set<Categoria> getCategorias() {
+		return categorias;
+	}
+	public void setCategorias(Set<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+	public List<AvaliacaoSerie> getAvaliacoes() {
         return avaliacoes;
     }
 
@@ -142,11 +169,5 @@ public class Serie {
         this.avaliacoes = avaliacoes;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+    
 }

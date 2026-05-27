@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@JsonPropertyOrder({"id", "filmeId", "filmeTitulo", "nota", "comentario", "dataAvaliacao"})
+@JsonPropertyOrder({"id", "filmeId", "filmeTitulo", "nomeUsuario", "nota", "comentario", "dataAvaliacao"})
 
 public class AvaliacaoFilmeDTOResponse {
 
@@ -17,6 +17,9 @@ public class AvaliacaoFilmeDTOResponse {
     
     @Schema(description = "Título do filme avaliado", example = "Vingadores: Ultimato")
     private String filmeTitulo;
+    
+    @Schema(description = "Nome do usuário que avaliou", example = "João Silva")
+    private String nomeUsuario;
 
     @Schema(description = "Nota da avaliação", example = "8.5")
     private Double nota;
@@ -31,12 +34,13 @@ public class AvaliacaoFilmeDTOResponse {
         super();
     }
 
-    public AvaliacaoFilmeDTOResponse(Long id, Long filmeId,  String filmeTitulo, Double nota, String comentario, LocalDate dataAvaliacao) {
+    public AvaliacaoFilmeDTOResponse(Long id, Long filmeId,  String filmeTitulo, String nomeUsuario, Double nota, String comentario, LocalDate dataAvaliacao) {
         super();
         this.id = id;
         this.filmeId = filmeId;
         this.filmeTitulo = filmeTitulo;
         this.nota = nota;
+        this.nomeUsuario = nomeUsuario;
         this.comentario = comentario;
         this.dataAvaliacao = dataAvaliacao;
     }
@@ -65,7 +69,15 @@ public class AvaliacaoFilmeDTOResponse {
         this.filmeTitulo = filmeTitulo;
     }
 
-    public Double getNota() {
+    public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
+
+	public Double getNota() {
         return nota;
     }
 
