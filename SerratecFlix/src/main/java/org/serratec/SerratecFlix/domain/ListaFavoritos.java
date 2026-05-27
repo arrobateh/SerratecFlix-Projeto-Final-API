@@ -1,11 +1,20 @@
 package org.serratec.SerratecFlix.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-
 import java.time.LocalDate;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "lista_favoritos")
@@ -30,7 +39,11 @@ public class ListaFavoritos {
     private Usuario usuario;
 
     @ManyToMany
-    @JoinTable(name = "lista_series", joinColumns = @JoinColumn(name = "id_lista_favoritos"), inverseJoinColumns = @JoinColumn(name = "id_series"))
+    @JoinTable(
+        name = "lista_favoritos_serie",
+        joinColumns = @JoinColumn(name = "id_lista_favoritos"),
+        inverseJoinColumns = @JoinColumn(name = "id_serie")
+    )
     private List<Serie> series;
 
     @ManyToMany
@@ -80,19 +93,20 @@ public class ListaFavoritos {
         this.usuario = usuario;
     }
 
-    public List<Serie> getSeries() {
-        return series;
-    }
+	public List<Serie> getSeries() {
+		return series;
+	}
 
-    public void setSeries(List<Serie> series) {
-        this.series = series;
-    }
-
-    public List<Filme> getFilmes() {
-        return filmes;
-    }
-
-    public void setFilmes(List<Filme> filmes) {
-        this.filmes = filmes;
-    }
+	public void setSeries(List<Serie> series) {
+		this.series = series;
+	}
+    
+    
+    
+    
+    
+    
 }
+
+
+

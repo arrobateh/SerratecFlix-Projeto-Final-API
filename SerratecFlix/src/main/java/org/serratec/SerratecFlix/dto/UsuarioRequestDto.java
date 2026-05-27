@@ -16,7 +16,7 @@ public class UsuarioRequestDto {
     private String username;
 
     @NotBlank(message = "senha dever ser preenchida")
-    @Size(min = 8)
+    @Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres")
     private String senha;
 
     private String cep;
@@ -37,7 +37,7 @@ public class UsuarioRequestDto {
         this.email = email;
     }
 
-    public String getUsername() {
+    public String getUsernameDomain() {
         return username;
     }
 

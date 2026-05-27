@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Tag(name = "Series", description = "Endpoints para gerenciar as séries")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/series")
 public class SerieController {

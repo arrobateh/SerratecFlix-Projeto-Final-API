@@ -4,11 +4,11 @@ import org.serratec.SerratecFlix.domain.Endereco;
 import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.UsuarioRequestDto;
 import org.serratec.SerratecFlix.dto.UsuarioResponseDto;
-import org.serratec.SerratecFlix.dto.ViaCepDto;
 import org.serratec.SerratecFlix.exception.ConflitoException;
 import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
 import org.serratec.SerratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private ViaCepService viaCepService;
+    private BCryptPasswordEncoder encoder;
 
     public List<UsuarioResponseDto> listaUsuarios() {
         return usuarioRepository.findAll()
@@ -54,13 +54,10 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
 
         usuario.setNome(usuarioRequestDto.getNome());
+        String senhaCriptografada = encoder.encode(usuarioRequestDto.getSenha());
+        usuario.setSenha(senhaCriptografada);
         usuario.setEmail(usuarioRequestDto.getEmail());
-        usuario.setUsername(usuarioRequestDto.getUsername());
-        usuario.setSenha(usuarioRequestDto.getSenha());
-
-        usuario.setEndereco(endereco);
-        endereco.setUsuario(usuario);
-
+        usuario.setUsername(usuarioRequestDto.getUsernameDomain()); //Adicionei esse mét0do
         return UsuarioResponseDto.from(usuarioRepository.save(usuario));
     }
 

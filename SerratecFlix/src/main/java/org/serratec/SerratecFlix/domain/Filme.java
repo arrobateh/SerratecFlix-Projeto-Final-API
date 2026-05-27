@@ -66,9 +66,13 @@ public class Filme {
 	@JoinTable( name = "filme_categoria", joinColumns = @JoinColumn(name = "filme_id"),
 		inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private Set<Categoria> categorias = new HashSet<>();
-
-	@ManyToMany(mappedBy = "filmes")
-	@JsonIgnore
+	
+	@ManyToMany
+	@JoinTable(
+	    name = "lista_favoritos_filme",
+	    joinColumns = @JoinColumn(name = "id_filme"),
+	    inverseJoinColumns = @JoinColumn(name = "id_lista_favoritos")
+	)
 	private Set<ListaFavoritos> listaFavoritos = new HashSet<>();
 	
 	public Filme() {

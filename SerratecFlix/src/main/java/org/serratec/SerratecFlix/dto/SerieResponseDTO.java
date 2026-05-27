@@ -24,8 +24,12 @@ public class SerieResponseDTO {
     private LocalDate dataLancamento;
     @Schema(description = "A nota média da série")
     private Double notaMediaSerie;
-    @Schema(description = "As categorias da série")
+    @Schema(description = "A categoria da série")
+    @JsonProperty("Categoria")
     private List<String> categorias;
+    @Schema(description = "As avaliações da série")
+    @JsonProperty("Avaliações")
+    private List<String> avaliacoes;
 
     public SerieResponseDTO(Serie serie) {
         this.idSerie = serie.getIdSerie();
@@ -34,11 +38,22 @@ public class SerieResponseDTO {
         this.temporadas = serie.getTemporadas();
         this.episodios = serie.getEpisodios();
         this.dataLancamento = serie.getDataLancamento();
-        this.notaMediaSerie = serie.getNotaMediaSerie();
-        this.categorias = serie.getCategorias() != null ? serie.getCategorias()
-                                                          .stream()
-                                                          .map(Categoria::getNome)
-                                                          .toList() : List.of("Sem categoria vinculada");
+        this.categorias = serie.getCategorias() != null && !serie.getCategorias().isEmpty()
+        	    ? serie.getCategorias().stream().map(c -> c.getNome()).collect(Collectors.toList())
+        	    : List.of("Sem categoria vinculada");
+        if (serie.getNotaMediaSerie() != null) {
+            this.notaMediaSerie = BigDecimal.valueOf(serie.getNotaMediaSerie())
+                    .setScale(1, RoundingMode.HALF_UP)
+                    .doubleValue();
+        } else {
+            this.notaMediaSerie = 0.0;
+        }
+
+        if(serie.getAvaliacoes() != null) {
+            this.avaliacoes = serie.getAvaliacoes().stream()
+                    .map(a -> a.getUsuario().getNome() + " - " + a.getComentario())
+                    .collect(Collectors.toList());
+        }
     }
 
     public Long getIdSerie() {
@@ -98,7 +113,15 @@ public class SerieResponseDTO {
     }
 
     public List<String> getCategorias() {
-        return categorias;
+		return categorias;
+	}
+
+	public void setCategorias(List<String> categorias) {
+		this.categorias = categorias;
+	}
+
+	public List<String> getAvaliacoes() {
+        return avaliacoes;
     }
 
     public void setCategorias(List<String> categorias) {
