@@ -5,8 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.serratec.SerratecFlix.domain.Endereco;
 import org.serratec.SerratecFlix.domain.Usuario;
 
-import java.util.List;
-
 @JsonPropertyOrder({"id", "nome", "email", "username", "endereco"})
 public class UsuarioResponseDto {
 

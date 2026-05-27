@@ -9,6 +9,7 @@ import org.serratec.SerratecFlix.domain.Categoria;
 import org.serratec.SerratecFlix.domain.Filme;
 import org.serratec.SerratecFlix.dto.FilmeDTORequest;
 import org.serratec.SerratecFlix.dto.FilmeDTOResponse;
+import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
 import org.serratec.SerratecFlix.repository.CategoriaRepository;
 import org.serratec.SerratecFlix.repository.FilmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,7 @@ public class FilmeService {
     public FilmeDTOResponse buscar(Long id) {
 
         Filme filme = filmeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Filme não encontrado com id: " + id));
+        		.orElseThrow(() -> new RecursoNaoEncontradoException("Filme não encontrado com id: " + id));
 
         FilmeDTOResponse filmeDTOResponse = new FilmeDTOResponse();
 
@@ -95,7 +96,7 @@ public class FilmeService {
 
     	Set<Categoria> categorias = new HashSet<>(categoriaRepository.findAllById(dto.getCategoriaIds()));
     	if (categorias.isEmpty()) {
-    	    throw new RuntimeException("Nenhuma categoria encontrada");
+    		throw new RecursoNaoEncontradoException("Nenhuma categoria encontrada para os ids informados");
     	}
         Filme filme = new Filme();
        
@@ -127,11 +128,11 @@ public class FilmeService {
     public FilmeDTOResponse atualizar(Long id, FilmeDTORequest dto) {
 
         Filme filme = filmeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Filme não encontrado com id: " + id));
+        		.orElseThrow(() -> new RecursoNaoEncontradoException("Filme não encontrado com id: " + id));
         
         Set<Categoria> categorias = new HashSet<>(categoriaRepository.findAllById(dto.getCategoriaIds()));
         if (categorias.isEmpty()) {
-            throw new RuntimeException("Nenhuma categoria encontrada");
+        	throw new RecursoNaoEncontradoException("Nenhuma categoria encontrada para os ids informados");
         }
         filme.getCategorias().clear();
         filme.setCategorias(categorias);
@@ -163,7 +164,8 @@ public class FilmeService {
     public void deletar(Long id) {
 
         Filme filme = filmeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Filme não encontrado com id: " + id));
+        		.orElseThrow(() -> new RecursoNaoEncontradoException("Filme não encontrado com id: " + id));
+
 
         filmeRepository.delete(filme);
     }
