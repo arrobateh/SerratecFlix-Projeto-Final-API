@@ -27,11 +27,11 @@ public class ListaFavoritos {
     @NotBlank(message = "Nome dever ser preenchido")
     private String nomeLista;
 
-
+    @Column(name = "privado")
     private Boolean privado = false;
 
-
-    private LocalDate dataCriacao;
+    @Column(name = "data_criacao")
+    private LocalDate dataCriacao =  LocalDate.now();
 
     @ManyToOne
     @JoinColumn(name = "id_usario")
@@ -45,6 +45,10 @@ public class ListaFavoritos {
         inverseJoinColumns = @JoinColumn(name = "id_serie")
     )
     private List<Serie> series;
+
+    @ManyToMany
+    @JoinTable(name = "lista_filmes", joinColumns = @JoinColumn(name = "id_lista_favoritos"), inverseJoinColumns = @JoinColumn(name = "id_filmes"))
+    private List<Filme> filmes;
 
     public ListaFavoritos() {
     }

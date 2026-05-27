@@ -71,9 +71,14 @@ public class Serie {
     @OneToMany(mappedBy = "serie")
     private List<AvaliacaoSerie> avaliacoes;
 
+    @ManyToMany(mappedBy = "series")
+    @JsonIgnore
+    private Set<ListaFavoritos> listaFavoritos = new HashSet<>();
+
     public Serie () {
 
     }
+
     public Serie(Long idSerie,
                  String tituloSerie,
                  String descricaoSerie,
@@ -83,7 +88,6 @@ public class Serie {
                  Double notaMediaSerie,
                  Set<Categoria> categorias,
                  List<AvaliacaoSerie> avaliacoes) {
-
         this.idSerie = idSerie;
         this.tituloSerie = tituloSerie;
         this.descricaoSerie = descricaoSerie;

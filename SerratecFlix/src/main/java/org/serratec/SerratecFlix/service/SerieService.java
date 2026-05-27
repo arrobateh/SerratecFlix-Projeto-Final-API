@@ -61,8 +61,8 @@ public class SerieService {
         Categoria categoria = categoriaRepository.findById(serieRequest.getIdCategoria())
                 .orElseThrow(() -> new RuntimeException("Categoria não encontrada com ID: " + serieRequest.getIdCategoria()));
 
-        Serie serie = new Serie();
-
+        Serie serie = serieRepository.findById(id).orElseThrow(() -> new RuntimeException("Série não encontrada com ID: " + id));
+        
         serie.setTituloSerie(serieRequest.getTituloSerie());
         serie.setDescricaoSerie(serieRequest.getDescricaoSerie());
         serie.setTemporadas(serieRequest.getTemporadas());

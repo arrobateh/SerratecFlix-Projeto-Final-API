@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/usuarios")
-@Tag(name = "Usuraios", description = "Gerenciamento de usuarios")
+@Tag(name = "Usuarios", description = "Gerenciamento de usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -48,6 +48,12 @@ public class UsuarioController {
     }
     
     
+
+    @PostMapping
+    @Operation(summary = "Cadastra um novo usuario")
+    public ResponseEntity<UsuarioResponseDto> salvar(@Valid @RequestBody UsuarioRequestDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.salvar(dto));
+    }
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza dados de um usuario")

@@ -34,7 +34,7 @@ public class FilmeService {
         for (Filme filme : filmes) {
 
             FilmeDTOResponse filmesDTOResponse = new FilmeDTOResponse();
-            filmesDTOResponse.setId(filme.getId());
+            filmesDTOResponse.setIdFilme(filme.getIdFilme());
             filmesDTOResponse.setTitulo(filme.getTitulo());
             filmesDTOResponse.setDescricao(filme.getDescricao());
             filmesDTOResponse.setDuracao(filme.getDuracao());
@@ -56,7 +56,7 @@ public class FilmeService {
         List<FilmeDTOResponse> filmesDTO = new ArrayList<>();
         for (Filme filme : filmes) {
             FilmeDTOResponse dto = new FilmeDTOResponse();
-            dto.setId(filme.getId());
+            dto.setIdFilme(filme.getIdFilme());
             dto.setTitulo(filme.getTitulo());
             dto.setDescricao(filme.getDescricao());
             dto.setDuracao(filme.getDuracao());
@@ -77,7 +77,7 @@ public class FilmeService {
 
         FilmeDTOResponse filmeDTOResponse = new FilmeDTOResponse();
 
-        filmeDTOResponse.setId(filme.getId());
+        filmeDTOResponse.setIdFilme(filme.getIdFilme());
         filmeDTOResponse.setTitulo(filme.getTitulo());
         filmeDTOResponse.setDescricao(filme.getDescricao());
         filmeDTOResponse.setDuracao(filme.getDuracao());
@@ -111,7 +111,7 @@ public class FilmeService {
         filme = filmeRepository.save(filme);
 
         FilmeDTOResponse filmeDTOResponse = new FilmeDTOResponse();
-        filmeDTOResponse.setId(filme.getId());
+        filmeDTOResponse.setIdFilme(filme.getIdFilme());
         filmeDTOResponse.setTitulo(filme.getTitulo());
         filmeDTOResponse.setDescricao(filme.getDescricao());
         filmeDTOResponse.setDuracao(filme.getDuracao());
@@ -148,7 +148,7 @@ public class FilmeService {
 
         FilmeDTOResponse filmeDTOResponse = new FilmeDTOResponse();
 
-        filmeDTOResponse.setId(filme.getId());
+        filmeDTOResponse.setIdFilme(filme.getIdFilme());
         filmeDTOResponse.setTitulo(filme.getTitulo());
         filmeDTOResponse.setDescricao(filme.getDescricao());
         filmeDTOResponse.setDuracao(filme.getDuracao());
