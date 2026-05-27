@@ -1,11 +1,13 @@
 package org.serratec.SerratecFlix.dto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.serratec.SerratecFlix.domain.Endereco;
 import org.serratec.SerratecFlix.domain.Usuario;
 
 import java.util.List;
 
+@JsonPropertyOrder({"id", "nome", "email", "username", "endereco"})
 public class UsuarioResponseDto {
 
     @Schema(description = "ID da usuario", example = "1")

@@ -1,5 +1,6 @@
 package org.serratec.SerratecFlix.dto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.serratec.SerratecFlix.domain.Filme;
 import org.serratec.SerratecFlix.domain.ListaFavoritos;
@@ -8,6 +9,7 @@ import org.serratec.SerratecFlix.domain.Serie;
 import java.time.LocalDate;
 import java.util.List;
 
+@JsonPropertyOrder({"id", "nomeLista", "privado", "dataCriacao", "filmes", "series"})
 public class ListaFavoritosResponseDto {
 
     @Schema(description = "ID da Lista", example = "1")
