@@ -1,8 +1,12 @@
+## 🚀 PROJETO FINAL — API RESTful com Spring Boot
+
 # 🎬 SerratecFlix
 
-## 🎯 Tema do Projeto
+---
 
-🚀 **PROJETO FINAL** — API RESTful com Spring Boot
+## 📖 Descrição
+
+O **SerratecFlix** é uma plataforma de streaming geek onde usuários podem avaliar filmes, séries e animes, criar listas, favoritar conteúdos e acompanhar sua watchlist.
 
 ---
 
@@ -15,12 +19,6 @@
 🧑‍💻 **Kenny Robert** — Implementação do pacote exception e filtro de conteúdo nas avaliações do usuário.
 
 🧑‍💻 **Wallace Ildefonso** — Entidades Série e AvaliacaoSerie com seus respectivos pacotes. Métodos adicionais de lista de avaliações na série, camada de segurança e desenvolvimento de uma página HTML para Séries.
-
----
-
-## 📖 Descrição
-
-O **SerratecFlix** é uma plataforma de streaming geek onde usuários podem avaliar filmes, séries e animes, criar listas, favoritar conteúdos e acompanhar sua watchlist.
 
 ---
 
@@ -86,27 +84,27 @@ Acesse a documentação: `http://localhost:8080/swagger-ui.html`
 
 `GET /filmes` — Lista todos os filmes
 
-`GET /filmes/{id}` — Busca por ID
-
 `POST /filmes` — Cadastra filme
-
-`PUT /filmes/{id}` — Atualiza filme
 
 `DELETE /filmes/{id}` — Remove filme
 
 `GET /filmes/categoria/{id}` — Lista por categoria
 
+`GET /avaliacoes-filme` — Lista avaliações de filmes
+
+`POST /avaliacoes-filme` — Cadastra avaliação de filme
+
 **📺 Séries**
 
 `GET /series` — Lista todas as séries
 
-`GET /series/{id}` — Busca por ID
-
 `POST /series` — Cadastra série
 
-`PUT /series/{id}` — Atualiza série
-
 `DELETE /series/{id}` — Remove série
+
+`GET /avaliacao-serie` — Lista avaliações de séries
+
+`POST /avaliacao-serie` — Cadastra avaliação de série
 
 **🗂️ Categorias**
 
