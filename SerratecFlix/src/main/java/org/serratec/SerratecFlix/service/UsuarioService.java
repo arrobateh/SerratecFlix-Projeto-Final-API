@@ -68,6 +68,7 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
         usuario.setNome(usuarioRequestDto.getNome());
         usuario.setSenha(usuarioRequestDto.getSenha());
+        usuario.setUsername(usuarioRequestDto.getUsername());
         usuario.setEmail(usuarioRequestDto.getEmail());
         return UsuarioResponseDto.from(usuarioRepository.save(usuario));
     }
