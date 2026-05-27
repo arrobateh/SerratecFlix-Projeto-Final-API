@@ -1,5 +1,10 @@
 package org.serratec.SerratecFlix.service;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.serratec.SerratecFlix.domain.Categoria;
 import org.serratec.SerratecFlix.domain.Serie;
 import org.serratec.SerratecFlix.dto.SerieRequestDTO;
@@ -8,10 +13,6 @@ import org.serratec.SerratecFlix.repository.CategoriaRepository;
 import org.serratec.SerratecFlix.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class SerieService {
@@ -48,7 +49,7 @@ public class SerieService {
         serie.setTemporadas(serieRequest.getTemporadas());
         serie.setEpisodios(serieRequest.getEpisodios());
         serie.setDataLancamento(serieRequest.getDataLancamento());
-        serie.setCategorias(Set.of(categoria));
+        serie.setCategorias(new HashSet<>(Set.of(categoria)));
 
         serieRepository.save(serie);
 
@@ -67,7 +68,7 @@ public class SerieService {
         serie.setTemporadas(serieRequest.getTemporadas());
         serie.setEpisodios(serieRequest.getEpisodios());
         serie.setDataLancamento(serieRequest.getDataLancamento());
-        serie.setCategorias(Set.of(categoria));
+        serie.setCategorias(new HashSet<>(Set.of(categoria)));
 
         serieRepository.save(serie);
 

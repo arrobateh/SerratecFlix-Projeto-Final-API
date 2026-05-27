@@ -6,11 +6,13 @@ import java.util.List;
 
 import org.serratec.SerratecFlix.domain.AvaliacaoFilme;
 import org.serratec.SerratecFlix.domain.Filme;
+import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.AvaliacaoFilmeDTORequest;
 import org.serratec.SerratecFlix.dto.AvaliacaoFilmeDTOResponse;
 import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
 import org.serratec.SerratecFlix.repository.AvaliacaoFilmeRepository;
 import org.serratec.SerratecFlix.repository.FilmeRepository;
+import org.serratec.SerratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class AvaliacaoFilmeService {
 
     @Autowired
     private FilmeRepository filmeRepository;
+    
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public List<AvaliacaoFilmeDTOResponse> findAll() {
         List<AvaliacaoFilme> avaliacoes = avaliacaoFilmeRepository.findAll();
@@ -34,6 +39,7 @@ public class AvaliacaoFilmeService {
             dto.setDataAvaliacao(avaliacao.getDataAvaliacao());
             dto.setFilmeId(avaliacao.getFilme().getIdFilme());
             dto.setFilmeTitulo(avaliacao.getFilme().getTitulo());
+            dto.setNomeUsuario(avaliacao.getUsuario().getNome());
             avaliacoesDTO.add(dto);
         }
         return avaliacoesDTO;
@@ -50,6 +56,7 @@ public class AvaliacaoFilmeService {
             dto.setDataAvaliacao(avaliacao.getDataAvaliacao());
             dto.setFilmeId(avaliacao.getFilme().getIdFilme());
             dto.setFilmeTitulo(avaliacao.getFilme().getTitulo());
+            dto.setNomeUsuario(avaliacao.getUsuario().getNome());
             avaliacoesDTO.add(dto);
         }
         return avaliacoesDTO;
@@ -58,19 +65,25 @@ public class AvaliacaoFilmeService {
     public AvaliacaoFilmeDTOResponse inserir(AvaliacaoFilmeDTORequest dto) {
         Filme filme = filmeRepository.findById(dto.getFilmeId())
         		.orElseThrow(() -> new RecursoNaoEncontradoException("Filme não encontrado com id: " + dto.getFilmeId()));
-
+        
+        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado com id: " + dto.getUsuarioId()));
+     
         AvaliacaoFilme avaliacao = new AvaliacaoFilme();
         avaliacao.setNota(dto.getNota());
         avaliacao.setComentario(dto.getComentario());
         avaliacao.setDataAvaliacao(LocalDate.now());
         avaliacao.setFilme(filme);
-
+        avaliacao.setUsuario(usuario);
+        
+        
         avaliacao = avaliacaoFilmeRepository.save(avaliacao);
 
         Double media = avaliacaoFilmeRepository.calcularMediaNotasPorFilme(filme.getIdFilme());
         filme.setNotaMedia(media);
         filmeRepository.save(filme);
-
+        
+    
         AvaliacaoFilmeDTOResponse response = new AvaliacaoFilmeDTOResponse();
         response.setId(avaliacao.getId());
         response.setNota(avaliacao.getNota());
@@ -78,6 +91,7 @@ public class AvaliacaoFilmeService {
         response.setDataAvaliacao(avaliacao.getDataAvaliacao());
         response.setFilmeId(filme.getIdFilme());
         response.setFilmeTitulo(filme.getTitulo());
+        response.setNomeUsuario(avaliacao.getUsuario().getNome());
 
         return response;
     }
@@ -102,6 +116,7 @@ public class AvaliacaoFilmeService {
         response.setNota(avaliacao.getNota());
         response.setComentario(avaliacao.getComentario());
         response.setDataAvaliacao(avaliacao.getDataAvaliacao());
+        response.setNomeUsuario(avaliacao.getUsuario().getNome());
 
         return response;
     }  

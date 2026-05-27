@@ -4,9 +4,7 @@ import org.serratec.SerratecFlix.domain.Endereco;
 import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.UsuarioRequestDto;
 import org.serratec.SerratecFlix.dto.UsuarioResponseDto;
-import org.serratec.SerratecFlix.dto.ViaCepDto;
 import org.serratec.SerratecFlix.exception.ConflitoException;
-import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
 import org.serratec.SerratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,12 +53,7 @@ public class UsuarioService {
 
         usuario.setNome(usuarioRequestDto.getNome());
         usuario.setEmail(usuarioRequestDto.getEmail());
-        usuario.setUsername(usuarioRequestDto.getUsername());
-        usuario.setSenha(usuarioRequestDto.getSenha());
-
-        usuario.setEndereco(endereco);
-        endereco.setUsuario(usuario);
-
+        usuario.setUsername(usuarioRequestDto.getUsername()); 
         return UsuarioResponseDto.from(usuarioRepository.save(usuario));
     }
 
