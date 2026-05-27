@@ -5,6 +5,8 @@ import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.UsuarioRequestDto;
 import org.serratec.SerratecFlix.dto.UsuarioResponseDto;
 import org.serratec.SerratecFlix.dto.ViaCepDto;
+import org.serratec.SerratecFlix.exception.ConflitoException;
+import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
 import org.serratec.SerratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,13 +32,13 @@ public class UsuarioService {
 
     public UsuarioResponseDto findById(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
         return UsuarioResponseDto.from(usuario);
     }
 
     public UsuarioResponseDto salvar(UsuarioRequestDto usuarioRequestDto) {
         if (usuarioRepository.existsByEmail(usuarioRequestDto.getEmail())) {
-            throw new RuntimeException("Email já cadastrado");
+            throw new ConflitoException("Email já cadastrado");
         }
 
         ViaCepDto viaCep = viaCepService.buscarViaCep(usuarioRequestDto.getCep());
@@ -63,7 +65,7 @@ public class UsuarioService {
     }
 
     public UsuarioResponseDto atualizar(Long id, UsuarioRequestDto usuarioRequestDto) {
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
         usuario.setNome(usuarioRequestDto.getNome());
         usuario.setSenha(usuarioRequestDto.getSenha());
         usuario.setEmail(usuarioRequestDto.getEmail());

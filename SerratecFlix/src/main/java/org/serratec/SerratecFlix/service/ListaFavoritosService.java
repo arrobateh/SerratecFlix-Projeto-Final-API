@@ -1,11 +1,14 @@
 package org.serratec.SerratecFlix.service;
 
+import org.jspecify.annotations.NonNull;
 import org.serratec.SerratecFlix.domain.Filme;
 import org.serratec.SerratecFlix.domain.ListaFavoritos;
 import org.serratec.SerratecFlix.domain.Serie;
 import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.ListaFavoritosRequestDto;
 import org.serratec.SerratecFlix.dto.ListaFavoritosResponseDto;
+import org.serratec.SerratecFlix.exception.ConflitoException;
+import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
 import org.serratec.SerratecFlix.repository.FilmeRepository;
 import org.serratec.SerratecFlix.repository.ListaFavoritosRepository;
 import org.serratec.SerratecFlix.repository.SerieRepository;
@@ -42,15 +45,15 @@ public class ListaFavoritosService {
     public ListaFavoritosResponseDto findById(Long id) {
         return listaFavoritosRepository.findById(id)
                 .map(ListaFavoritosResponseDto::from)
-                .orElseThrow(() -> new RuntimeException("Nenhuma Lista Favorita foi encontrada"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Nenhuma Lista Favorita foi encontrada"));
     }
 
     public ListaFavoritosResponseDto criar(ListaFavoritosRequestDto listaFavoritosRequestDto) {
         Usuario usuario = usuarioRepository.findById(listaFavoritosRequestDto.getUsuarioId())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
 
         if (listaFavoritosRepository.existsByNomeLista(listaFavoritosRequestDto.getNomeLista())) {
-            throw new RuntimeException("Já existe uma lista com esse nome");
+            throw new ConflitoException("Já existe uma lista com esse nome");
         }
         List<Serie> series = serieRepository.findAllById(listaFavoritosRequestDto.getIdSerie());
         List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequestDto.getIdFilme());
@@ -64,12 +67,12 @@ public class ListaFavoritosService {
         return ListaFavoritosResponseDto.from(listaFavoritosRepository.save(listaFavoritos));
     }
 
-    public ListaFavoritosResponseDto atualizar(Long id, ListaFavoritosRequestDto listaFavoritosRequestDto) {
+    public ListaFavoritosResponseDto atualizar(Long id, @NonNull ListaFavoritosRequestDto listaFavoritosRequestDto) {
         ListaFavoritos listaFavoritos = listaFavoritosRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Lista não encontrada"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Lista não encontrada"));
 
         if (listaFavoritosRepository.existsByNomeListaAndIdNot(listaFavoritosRequestDto.getNomeLista(), id)) {
-            throw new RuntimeException("Já existe uma lista com esse nome");
+            throw new ConflitoException("Já existe uma lista com esse nome");
         }
         List<Serie> series = serieRepository.findAllById(listaFavoritosRequestDto.getIdSerie());
         List<Filme> filmes = filmeRepository.findAllById(listaFavoritosRequestDto.getIdFilme());
