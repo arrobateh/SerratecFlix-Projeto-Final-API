@@ -91,6 +91,27 @@ public class FilmeService {
     }
     
     
+    public List<FilmeDTOResponse> buscarPorCategoria(Long categoriaId) {
+        List<Filme> filmes = filmeRepository.findByCategorias_Id(categoriaId);
+        if (filmes.isEmpty()) {
+            throw new RecursoNaoEncontradoException("Nenhum filme encontrado para a categoria: " + categoriaId);
+        }
+        List<FilmeDTOResponse> filmesDTO = new ArrayList<>();
+        for (Filme filme : filmes) {
+            FilmeDTOResponse dto = new FilmeDTOResponse();
+            dto.setId(filme.getId());
+            dto.setTitulo(filme.getTitulo());
+            dto.setDescricao(filme.getDescricao());
+            dto.setDuracao(filme.getDuracao());
+            dto.setDataLancamento(filme.getDataLancamento());
+            dto.setNotaMedia(filme.getNotaMedia());
+            dto.setClassificacaoIndicativa(filme.getClassificacaoIndicativa());
+            dto.setCategorias(mapCategorias(filme));
+            filmesDTO.add(dto);
+        }
+        return filmesDTO;
+    }
+    
     
     public FilmeDTOResponse inserir(FilmeDTORequest dto) {
 
