@@ -1,4 +1,4 @@
-package org.serratec.serratecflix.exception;
+package org.serratec.SerratecFlix.exception;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -59,4 +59,18 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(erroResposta);
     }
+
+    @ExceptionHandler(ConteudoInapropiadoException.class)
+    public ResponseEntity<ErroResposta> handleConteudoInapropriado(ConteudoInapropiadoException ex) {
+
+        ErroResposta erroResposta = new ErroResposta(
+                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                ex.getMessage(),
+                LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(erroResposta);
+    }
+
+
+
 }

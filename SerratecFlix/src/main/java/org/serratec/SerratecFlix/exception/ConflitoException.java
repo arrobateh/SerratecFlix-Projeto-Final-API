@@ -9,3 +9,5 @@ public class ConflitoException extends RuntimeException {
         super(mensagem);
     }
 }
+
+.
