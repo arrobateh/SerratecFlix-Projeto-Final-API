@@ -1,8 +1,11 @@
-package org.serratec.serratecflix.exception;
+package org.serratec.SerratecFlix.exception; //Alterei o nome
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.serratec.SerratecFlix.exception.ErroResposta;
+import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
+import org.serratec.SerratecFlix.exception.ConflitoException;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
@@ -39,7 +42,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(RecursoNaoEncontradoException.class)
     public ResponseEntity<ErroResposta> handleRecursoNaoEncontrado(
-            RecursoNaoEncontradoException ex) {
+            org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException ex) {
 
         ErroResposta erroResposta = new ErroResposta(
                 HttpStatus.NOT_FOUND.value(),
@@ -50,7 +53,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ConflitoException.class)
-    public ResponseEntity<ErroResposta> handleConflito(ConflitoException ex) {
+    public ResponseEntity<org.serratec.SerratecFlix.exception.ErroResposta> handleConflito(ConflitoException ex) {
 
         ErroResposta erroResposta = new ErroResposta(
                 HttpStatus.CONFLICT.value(),

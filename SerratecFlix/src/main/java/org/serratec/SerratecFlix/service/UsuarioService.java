@@ -3,8 +3,11 @@ package org.serratec.SerratecFlix.service;
 import org.serratec.SerratecFlix.domain.Usuario;
 import org.serratec.SerratecFlix.dto.UsuarioRequestDto;
 import org.serratec.SerratecFlix.dto.UsuarioResponseDto;
+import org.serratec.SerratecFlix.exception.ConflitoException;
+import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
 import org.serratec.SerratecFlix.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +18,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     public List<UsuarioResponseDto> listaUsuarios() {
         return usuarioRepository.findAll()
@@ -31,17 +37,19 @@ public class UsuarioService {
 
     public UsuarioResponseDto salvar(UsuarioRequestDto usuarioRequestDto) {
         if (usuarioRepository.existsByEmail(usuarioRequestDto.getEmail())) {
-            throw new RuntimeException("Email já cadastrado");
+            throw new ConflitoException("Email já cadastrado");
         }
         Usuario usuario = new Usuario();
         usuario.setNome(usuarioRequestDto.getNome());
-        usuario.setSenha(usuarioRequestDto.getSenha());
+        String senhaCriptografada = encoder.encode(usuarioRequestDto.getSenha());
+        usuario.setSenha(senhaCriptografada);
         usuario.setEmail(usuarioRequestDto.getEmail());
+        usuario.setUsername(usuarioRequestDto.getUsernameDomain()); //Adicionei esse mét0do
         return UsuarioResponseDto.from(usuarioRepository.save(usuario));
     }
 
     public UsuarioResponseDto atualizar(Long id, UsuarioRequestDto usuarioRequestDto) {
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"));
         usuario.setNome(usuarioRequestDto.getNome());
         usuario.setSenha(usuarioRequestDto.getSenha());
         usuario.setEmail(usuarioRequestDto.getEmail());

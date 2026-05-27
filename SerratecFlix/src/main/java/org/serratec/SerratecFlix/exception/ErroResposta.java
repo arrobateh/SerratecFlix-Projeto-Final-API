@@ -1,4 +1,4 @@
-package org.serratec.serratecflix.exception;
+package org.serratec.SerratecFlix.exception; //Alterei o nome
 
 import java.time.LocalDateTime;
 import java.util.List;

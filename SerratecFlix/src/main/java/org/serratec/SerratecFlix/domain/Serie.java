@@ -43,13 +43,16 @@ public class Serie {
     @Column(name = "nota_media_serie")
     private Double notaMediaSerie;
 
-//    @NotNull(message = "A categoria da serie é obrigatória")
-//    @ManyToOne
-//    @JoinColumn(name = "id_categoria")
-//    private Categoria categoria;
+    @NotNull(message = "A categoria da serie é obrigatória")
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
 
     @OneToMany(mappedBy = "serie")
     private List<AvaliacaoSerie> avaliacoes;
+
+    @ManyToMany(mappedBy = "serie")
+    private List<ListaFavoritos> listaFavoritos;
 
     public Serie () {
 
@@ -139,4 +142,11 @@ public class Serie {
         this.avaliacoes = avaliacoes;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 }

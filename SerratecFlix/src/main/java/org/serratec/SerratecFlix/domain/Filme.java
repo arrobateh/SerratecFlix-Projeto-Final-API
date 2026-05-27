@@ -68,7 +68,13 @@ public class Filme {
 		inverseJoinColumns = @JoinColumn(name = "categoria_id")
 	)
 	private Set<Categoria> categorias = new HashSet<>();
-	
+
+	@ManyToMany // Adicionei a anotação
+	@JoinTable(
+			name = "lista_favoritos_filme",
+			joinColumns = @JoinColumn(name = "filme_id"),
+			inverseJoinColumns = @JoinColumn(name = "lista_favoritos_id")
+	)
 	private Set<ListaFavoritos> listaFavoritos = new HashSet<>();
 	
 	public Filme() {

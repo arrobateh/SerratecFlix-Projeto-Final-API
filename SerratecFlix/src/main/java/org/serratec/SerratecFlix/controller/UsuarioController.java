@@ -7,13 +7,14 @@ import org.serratec.SerratecFlix.dto.UsuarioRequestDto;
 import org.serratec.SerratecFlix.dto.UsuarioResponseDto;
 import org.serratec.SerratecFlix.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/usuarios")
+@RequestMapping("/usuarios") // Retirei o "name"
 @Tag(name = "Usuraios", description = "Gerenciamento de usuarios")
 public class UsuarioController {
 
@@ -43,5 +44,11 @@ public class UsuarioController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         usuarioService.deletar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping // Adicionei o post
+    @Operation(summary = "Cadastra um novo usuario")
+    public ResponseEntity<UsuarioResponseDto> salvar(@Valid @RequestBody UsuarioRequestDto dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.salvar(dto));
     }
 }

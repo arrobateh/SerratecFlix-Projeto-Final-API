@@ -30,8 +30,12 @@ public class ListaFavoritos {
     private Usuario usuario;
 
     @ManyToMany
-    @JoinColumn(name = "id_series")
-    private List<Serie> series;
+    @JoinTable(  // Alterei a anotação
+            name = "lista_favoritos_serie",
+            joinColumns = @JoinColumn(name = "id_lista_favoritos"),
+            inverseJoinColumns = @JoinColumn(name = "id_serie")
+    )
+    private List<Serie> serie; // Retirei o ultimo "s"
 
     public ListaFavoritos() {
     }
@@ -74,5 +78,13 @@ public class ListaFavoritos {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<Serie> getSerie() { // Adicionei os get e set
+        return serie;
+    }
+
+    public void setSerie(List<Serie> serie) {
+        this.serie = serie;
     }
 }
