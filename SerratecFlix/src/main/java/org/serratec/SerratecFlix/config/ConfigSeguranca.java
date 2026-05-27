@@ -43,6 +43,7 @@ public class ConfigSeguranca {
 
                 .authorizeHttpRequests(auth -> auth
                         // Rotas públicas
+                        .requestMatchers("/", "/index.html", "/favicon.ico").permitAll()
                         .requestMatchers(HttpMethod.GET, "/serie/").permitAll()
                         .requestMatchers(HttpMethod.GET, "/serie/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuarios/**").permitAll()
