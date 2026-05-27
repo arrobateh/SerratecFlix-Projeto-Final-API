@@ -9,7 +9,7 @@ import org.serratec.SerratecFlix.domain.Serie;
 import java.time.LocalDate;
 import java.util.List;
 
-@JsonPropertyOrder({"id", "nomeLista", "privado", "dataCriacao", "filmes", "series"})
+@JsonPropertyOrder({"id", "nomeLista", "privado", "dataCriacao", "series", "filmes"})
 public class ListaFavoritosResponseDto {
 
     @Schema(description = "ID da Lista", example = "1")
