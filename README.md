@@ -21,7 +21,7 @@ O **SerratecFlix** é uma plataforma de streaming geek onde usuários podem aval
 
 🧑‍💻 **Bruno Vitor** — Entidades Filme, Categoria e AvaliaçãoFilme com seus respectivos pacotes. Métodos adicionais de Ranking/filmes e listagem de filmes por categoria. Criação do README.
 
-🧑‍💻 **Igor Bryan** — Entidades Usuario e ListaFavoritos com seus respectivos pacotes. Implementação da API externa ViaCep e histórico de filmes/séries assistidas do usuário.
+🧑‍💻 **Igor Brian** — Entidades Usuario e ListaFavoritos com seus respectivos pacotes. Implementação da API externa ViaCep e histórico de filmes/séries assistidas do usuário.
 
 🧑‍💻 **Kenny Robert** — Implementação do pacote exception e filtro de conteúdo nas avaliações do usuário.
 
