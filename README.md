@@ -107,9 +107,9 @@ Acesse a documentação: `http://localhost:8080/swagger-ui.html`
 
 `DELETE /series/{id}` — Remove série
 
-`GET /avaliacao-serie` — Lista avaliações de séries
+`GET /avaliacoes-series` — Lista avaliações de séries
 
-`POST /avaliacao-serie` — Cadastra avaliação de série
+`POST /avaliacoes-series` — Cadastra avaliação de série
 
 **🗂️ Categorias**
 
