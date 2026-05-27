@@ -4,13 +4,11 @@ import org.serratec.SerratecFlix.domain.Categoria;
 import org.serratec.SerratecFlix.domain.Serie;
 import org.serratec.SerratecFlix.dto.SerieRequestDTO;
 import org.serratec.SerratecFlix.dto.SerieResponseDTO;
+import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
 import org.serratec.SerratecFlix.repository.CategoriaRepository;
 import org.serratec.SerratecFlix.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SerieService {
@@ -32,14 +30,14 @@ public class SerieService {
     // 2. Buscar a série pelo ID
     public SerieResponseDTO buscarPorId(Long id) {
         Serie serie = serieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Série não encontrada com ID: " + id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Série não encontrada com ID: " + id));
         return new SerieResponseDTO(serie);
     }
 
     // 3. Cadastrar serie
     public SerieResponseDTO cadastrarSerie(SerieRequestDTO serieRequest) {
         Categoria categoria = categoriaRepository.findById(serieRequest.getIdCategoria())
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada com ID: " + serieRequest.getIdCategoria()));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Categoria não encontrada com ID: " + serieRequest.getIdCategoria()));
 
         Serie serie = new Serie();
         serie.setTituloSerie(serieRequest.getTituloSerie());
@@ -47,7 +45,7 @@ public class SerieService {
         serie.setTemporadas(serieRequest.getTemporadas());
         serie.setEpisodios(serieRequest.getEpisodios());
         serie.setDataLancamento(serieRequest.getDataLancamento());
-        serie.setCategoria(categoria);
+        serie.setCategorias(new HashSet<>(Set.of(categoria)));
 
         serieRepository.save(serie);
 
@@ -57,16 +55,16 @@ public class SerieService {
     // 4. Atualizar série
     public SerieResponseDTO atualizarSerie(Long id, SerieRequestDTO serieRequest) {
         Categoria categoria = categoriaRepository.findById(serieRequest.getIdCategoria())
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada com ID: " + serieRequest.getIdCategoria()));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Categoria não encontrada com ID: " + serieRequest.getIdCategoria()));
 
-        Serie serie = new Serie();
-
+        Serie serie = serieRepository.findById(id).orElseThrow(() -> new RuntimeException("Série não encontrada com ID: " + id));
+        
         serie.setTituloSerie(serieRequest.getTituloSerie());
         serie.setDescricaoSerie(serieRequest.getDescricaoSerie());
         serie.setTemporadas(serieRequest.getTemporadas());
         serie.setEpisodios(serieRequest.getEpisodios());
         serie.setDataLancamento(serieRequest.getDataLancamento());
-        serie.setCategoria(categoria);
+        serie.setCategorias(new HashSet<>(Set.of(categoria)));
 
         serieRepository.save(serie);
 
@@ -76,7 +74,7 @@ public class SerieService {
     // 5. Deletar série
     public void removerSerie (Long id) {
         if(!serieRepository.existsById(id)) {
-            throw new RuntimeException("Série não encontrada com ID: " + id);
+            throw new RecursoNaoEncontradoException("Série não encontrada com ID: " + id);
         }
         serieRepository.deleteById(id);
     }

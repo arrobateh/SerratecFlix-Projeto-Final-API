@@ -40,16 +40,12 @@ public class Categoria {
 	private Set<Filme> filmes = new HashSet<>();
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy = "categorias")
+	@ManyToMany(mappedBy = "categoria") // Retirei o ultimo "s"
 	private Set<Serie> series = new HashSet<>();
-	
-	
-	
 
 	public Categoria() {
 		super();
 	}
-
 
 	public Categoria(Long id,
 			 String nome,

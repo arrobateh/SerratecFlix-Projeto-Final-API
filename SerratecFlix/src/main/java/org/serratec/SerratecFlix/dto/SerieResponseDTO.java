@@ -1,47 +1,32 @@
 package org.serratec.SerratecFlix.dto;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.serratec.SerratecFlix.domain.Categoria;
 import org.serratec.SerratecFlix.domain.Serie;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Schema(description = "Modelo de dados para resposta da série")
-@JsonPropertyOrder({"idSerie", "tituloSerie", "descricaoSerie", "temporadas", "episodios", "dataLancamento", "notaMediaSerie", "nomeCategoria", "avaliacoes"})
 public class SerieResponseDTO {
 
     @Schema(description = "O ID da série", example = "1")
-    @JsonProperty("ID da serie")
     private Long idSerie;
     @Schema(description = "O título da série")
-    @JsonProperty("Titulo da serie")
     private String tituloSerie;
     @Schema(description = "A descrição da série")
-    @JsonProperty("Descricao da serie")
     private String descricaoSerie;
     @Schema(description = "O número de temporadas da série")
-    @JsonProperty("Temporadas")
     private Integer temporadas;
     @Schema(description = "O número de episódios da série")
-    @JsonProperty("Episodios")
     private Integer episodios;
     @Schema(description = "A data de lançamento da série")
-    @JsonProperty("Data de lançamento")
     private LocalDate dataLancamento;
     @Schema(description = "A nota média da série")
-    @JsonProperty("Nota média")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.0")
     private Double notaMediaSerie;
     @Schema(description = "A categoria da série")
     @JsonProperty("Categoria")
-    private String nomeCategoria;
+    private List<String> categorias;
     @Schema(description = "As avaliações da série")
     @JsonProperty("Avaliações")
     private List<String> avaliacoes;
@@ -53,8 +38,9 @@ public class SerieResponseDTO {
         this.temporadas = serie.getTemporadas();
         this.episodios = serie.getEpisodios();
         this.dataLancamento = serie.getDataLancamento();
-        this.nomeCategoria = serie.getCategoria() != null ? serie.getCategoria().getNome() : "Sem categoria vinculada";
-
+        this.categorias = serie.getCategorias() != null && !serie.getCategorias().isEmpty()
+        	    ? serie.getCategorias().stream().map(c -> c.getNome()).collect(Collectors.toList())
+        	    : List.of("Sem categoria vinculada");
         if (serie.getNotaMediaSerie() != null) {
             this.notaMediaSerie = BigDecimal.valueOf(serie.getNotaMediaSerie())
                     .setScale(1, RoundingMode.HALF_UP)
@@ -126,19 +112,19 @@ public class SerieResponseDTO {
         this.notaMediaSerie = notaMediaSerie;
     }
 
-    public String getNomeCategoria() {
-        return nomeCategoria;
-    }
+    public List<String> getCategorias() {
+		return categorias;
+	}
 
-    public void setNomeCategoria(String nomeCategoria) {
-        this.nomeCategoria = nomeCategoria;
-    }
+	public void setCategorias(List<String> categorias) {
+		this.categorias = categorias;
+	}
 
-    public List<String> getAvaliacoes() {
+	public List<String> getAvaliacoes() {
         return avaliacoes;
     }
 
-    public void setAvaliacoes(List<String> avaliacoes) {
-        this.avaliacoes = avaliacoes;
+    public void setCategorias(List<String> categorias) {
+        this.categorias = categorias;
     }
 }

@@ -1,7 +1,5 @@
 package org.serratec.SerratecFlix.domain;
 
-package org.serratec.SerratecFlix.domain;
-
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
