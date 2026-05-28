@@ -25,19 +25,25 @@ public class ListaFavoritosResponseDto {
     private LocalDate dataCriacao;
 
     @Schema(description = "id Series", example = "1 id da serie")
-    private List<Serie> series;
+    private List<String> series;
 
     @Schema(description = "id Filmes", example = "1 id do filme")
-    private List<Filme> filmes;
+    private List<String> filmes;
 
     public static ListaFavoritosResponseDto from(ListaFavoritos favoritos) {
         ListaFavoritosResponseDto dto = new ListaFavoritosResponseDto();
         dto.id = favoritos.getId();
         dto.nomeLista = favoritos.getNomeLista();
         dto.privado = favoritos.getPrivado();
-        dto.filmes = favoritos.getFilmes();
-        dto.series = favoritos.getSeries();
         dto.dataCriacao = favoritos.getDataCriacao();
+        dto.filmes = favoritos.getFilmes()
+                .stream()
+                .map(Filme::getTitulo)
+                .toList();
+        dto.series = favoritos.getSeries()
+                .stream()
+                .map(Serie::getTituloSerie)
+                .toList();
         return dto;
     }
 
@@ -73,19 +79,19 @@ public class ListaFavoritosResponseDto {
         this.dataCriacao = dataCriacao;
     }
 
-    public List<Serie> getSeries() {
+    public List<String> getSeries() {
         return series;
     }
 
-    public void setSeries(List<Serie> series) {
+    public void setSeries(List<String> series) {
         this.series = series;
     }
 
-    public List<Filme> getFilmes() {
+    public List<String> getFilmes() {
         return filmes;
     }
 
-    public void setFilmes(List<Filme> filmes) {
+    public void setFilmes(List<String> filmes) {
         this.filmes = filmes;
     }
 }
