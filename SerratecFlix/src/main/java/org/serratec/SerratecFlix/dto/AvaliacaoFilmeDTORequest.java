@@ -1,5 +1,6 @@
 package org.serratec.SerratecFlix.dto;
 
+import org.serratec.SerratecFlix.validacao.ConteudoApropriado;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -13,6 +14,7 @@ public class AvaliacaoFilmeDTORequest {
     @Schema(description = "Nota da avaliação", example = "8.5")
     private Double nota;
 
+    @ConteudoApropriado
     @Schema(description = "Comentário da avaliação", example = "Filme incrível!")
     private String comentario;
 
