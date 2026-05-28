@@ -71,16 +71,16 @@ INSERT INTO avaliacao_filme (nota, comentario, filme_id, usuario_id, data_avalia
 VALUES ('6.0', 'Engraçado, mas não para todos!', 5, 5, '2023-01-26');
 
 /* Adicionar séries */
-INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_lancamento)
-VALUES ('Friends', 'Série de comédia', '10', '236', '1994-09-22');
-INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_lancamento)
-VALUES ('Breaking Bad', 'Série de drama', '5', '62', '2008-01-20');
-INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_lancamento)
-VALUES ('True Detective', 'Série de ação', '3', '24', '2014-01-12');
-INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_lancamento)
-VALUES ('The Last of Us', 'Série de ficção científica', '1', '9', '2023-01-15');
-INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_lancamento)
-VALUES ('The Walking Dead', 'Série de terror', '11', '153', '2010-10-31');
+INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_lancamento, nota_media_serie)
+VALUES ('Friends', 'Série de comédia', '10', '236', '1994-09-22', '9.0');
+INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_lancamento, nota_media_serie)
+VALUES ('Breaking Bad', 'Série de drama', '5', '62', '2008-01-20', '9.5');
+INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_lancamento, nota_media_serie)
+VALUES ('True Detective', 'Série de ação', '3', '24', '2014-01-12', '8.5');
+INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_lancamento, nota_media_serie)
+VALUES ('The Last of Us', 'Série de ficção científica', '1', '9', '2023-01-15', '9.2');
+INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_lancamento, nota_media_serie)
+VALUES ('The Walking Dead', 'Série de terror', '11', '153', '2010-10-31', '7.8');
 
 /* Adicionar avaliações de séries */
 INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao,id_serie ,id_usuario)
