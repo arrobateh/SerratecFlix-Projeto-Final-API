@@ -73,7 +73,7 @@
 
         try {
             // Controller da serie
-            const response = await fetch('http://localhost:8080/serie');
+            const response = await fetch('http://localhost:8080/series');
             if (!response.ok) throw new Error('Erro na API Local. Verifique o preenchimento');
 
             const series = await response.json();
@@ -86,12 +86,15 @@
 
             // Monta os cards mapeando os nomes idênticos ao @JsonProperty na SerieResponseDTO
             for (const serie of series) {
-                const titulo = serie["Titulo da serie"] || "Série sem título";
-                const doc_descricao = serie["Descricao da serie"] || "Sem descrição disponível.";
-                const temporadas = serie["Temporadas"] || 0;
-                const episodios = serie["Episodios"] || 0;
-                const dataLancamento = serie["Data de lançamento"];
-                const nota = serie["Nota média"] != null ? parseFloat(serie["Nota média"]) : 0.0;
+                const titulo = serie.tituloSerie || "Série sem título";
+                const doc_descricao = serie.descricaoSerie || "Sem descrição disponível.";
+                const temporadas = serie.temporadas || 0;
+                const episodios = serie.episodios || 0;
+                const dataLancamento = serie.dataLancamento;
+                const nota = serie.notaMediaSerie != null ? parseFloat(serie.notaMediaSerie) : 0.0;
+
+                const listaCategoria = serie["Categoria"] || ["Geral"]
+                const categoriaTexto = listaCategoria.join(", ");
 
                 // Busca a capa na OMDb API usando o título
                 const capaUrl = await buscarPoster(titulo);
@@ -106,6 +109,7 @@
                     </div>
 
                     <div class="p-5 flex flex-col flex-grow">
+                        <span class="text-[10px] text-purple-400 font-bold tracking-wider uppercase mb-1">${categoriaTexto}</span>
                         <h3 class="text-lg font-bold text-white tracking-wide mb-2 group-hover:text-purple-400 transition-colors">${titulo}</h3>
                         <p class="text-gray-400 text-xs line-clamp-3 mb-4 flex-grow">${doc_descricao}</p>
 
