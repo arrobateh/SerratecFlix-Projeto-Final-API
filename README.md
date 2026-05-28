@@ -75,7 +75,7 @@ spring.datasource.password=sua_senha
 mvn spring-boot:run
 ```
 
-Acesse a documentação: `http://localhost:8080/swagger-ui.html`
+Acesse a documentação: `http://localhost:8080/swagger-ui/index.html`
 
 ---
 
