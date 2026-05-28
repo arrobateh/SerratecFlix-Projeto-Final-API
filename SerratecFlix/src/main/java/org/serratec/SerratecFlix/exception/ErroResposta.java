@@ -3,7 +3,7 @@ package org.serratec.SerratecFlix.exception;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class ErroResposta extends RuntimeException {
+public class ErroResposta {
 
     private Integer status;
     private String titulo;

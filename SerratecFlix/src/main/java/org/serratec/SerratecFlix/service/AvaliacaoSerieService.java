@@ -36,7 +36,7 @@ public class AvaliacaoSerieService {
     // 2. Selecionar avaliação por ID
     public AvaliacaoSerieResponseDTO buscarPorId(Long id) {
         AvaliacaoSerie avaliacaoSerie = avaliacaoSerieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException ("Avaliação não encontrada com ID" + id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException ("Avaliação não encontrada com ID" + id));
         return new AvaliacaoSerieResponseDTO(avaliacaoSerie);
     }
 
