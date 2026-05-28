@@ -1,6 +1,7 @@
 package org.serratec.SerratecFlix.controller;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.serratec.SerratecFlix.dto.CategoriaDTORequest;
 import org.serratec.SerratecFlix.dto.CategoriaDTOResponse;
 import org.serratec.SerratecFlix.service.CategoriaService;
@@ -14,6 +15,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/categorias")
+@Tag(name = "Categorias", description = "Gerenciamento Categorias")
 public class CategoriaController {
 
     @Autowired

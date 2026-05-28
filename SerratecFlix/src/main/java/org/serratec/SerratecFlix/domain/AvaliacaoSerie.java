@@ -1,5 +1,6 @@
 package org.serratec.SerratecFlix.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class AvaliacaoSerie {
 
     @ManyToOne
    @JoinColumn(name = "id_serie")
+    @JsonIgnore
     private Serie serie;
 
     @ManyToOne

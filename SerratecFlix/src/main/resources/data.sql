@@ -83,16 +83,27 @@ INSERT INTO serie (titulo_serie, descricao_serie, temporadas, episodios, data_la
 VALUES ('The Walking Dead', 'Série de terror', '11', '153', '2010-10-31');
 
 /* Adicionar avaliações de séries */
-INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao, id_usuario)
-VALUES ('9.0', 'Série clássica e divertida!', '2024-01-01', 1);
-INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao, id_usuario)
-VALUES ('9.5', 'Uma das melhores séries de todos os tempos!', '2024-01-02', 2);
-INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao, id_usuario)
-VALUES ('8.5', 'Série intrigante e bem produzida!', '2024-01-03', 3);
-INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao, id_usuario)
-VALUES ('9.2', 'Série emocionante e visualmente impressionante!', '2024-01-04', 4);
-INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao, id_usuario)
-VALUES ('7.8', 'Série de terror que mantém o suspense!', '2024-01-05', 5);
+INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao,id_serie ,id_usuario)
+VALUES ('9.0', 'Série clássica e divertida!', '2024-01-01', 1,1);
+INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao,id_serie , id_usuario)
+VALUES ('9.5', 'Uma das melhores séries de todos os tempos!', '2024-01-02',2, 2);
+INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao,id_serie , id_usuario)
+VALUES ('8.5', 'Série intrigante e bem produzida!', '2024-01-03', 3,3);
+INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao,id_serie , id_usuario)
+VALUES ('9.2', 'Série emocionante e visualmente impressionante!', '2024-01-04', 4,4);
+INSERT INTO avaliacao_serie (nota, comentario, data_avaliacao,id_serie , id_usuario)
+VALUES ('7.8', 'Série de terror que mantém o suspense!', '2024-01-05', 5,5);
+
+INSERT INTO serie_categoria (id_categoria, id_serie)
+VALUES (3, 1);
+INSERT INTO serie_categoria (id_categoria, id_serie)
+VALUES (1, 2);
+INSERT INTO serie_categoria (id_categoria, id_serie)
+VALUES (1, 3);
+INSERT INTO serie_categoria (id_categoria, id_serie)
+VALUES (1, 4);
+INSERT INTO serie_categoria (id_categoria, id_serie)
+VALUES (1, 5);
 
 /* Adicionar listas de favoritos */
 INSERT INTO lista_favoritos (nome_lista, privado, data_criacao, id_usario)

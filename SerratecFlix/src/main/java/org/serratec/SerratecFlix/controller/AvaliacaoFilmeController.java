@@ -2,6 +2,7 @@ package org.serratec.SerratecFlix.controller;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.serratec.SerratecFlix.dto.AvaliacaoFilmeDTORequest;
 import org.serratec.SerratecFlix.dto.AvaliacaoFilmeDTOResponse;
 import org.serratec.SerratecFlix.service.AvaliacaoFilmeService;
@@ -15,6 +16,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/avaliacoes-filmes")
+@Tag(name = "Avaliação de Filmes", description = "Gerenciamento de Avaliacão de Filmes")
 public class AvaliacaoFilmeController {
 
     @Autowired

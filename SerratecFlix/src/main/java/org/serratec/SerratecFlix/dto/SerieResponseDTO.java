@@ -1,8 +1,8 @@
 package org.serratec.SerratecFlix.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.serratec.SerratecFlix.domain.Categoria;
 import org.serratec.SerratecFlix.domain.Serie;
 
 import java.math.BigDecimal;
@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@JsonPropertyOrder({"idSerie", "tituloSerie", "descricaoSerie", "temporadas", "episodios", "dataLancamento", "categorias", "avaliacoes", "notaMediaSerie"})
 @Schema(description = "Modelo de dados para resposta da série")
 public class SerieResponseDTO {
 

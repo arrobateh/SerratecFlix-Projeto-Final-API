@@ -170,5 +170,11 @@ public class Serie {
         this.avaliacoes = avaliacoes;
     }
 
-    
+    public Set<ListaFavoritos> getListaFavoritos() {
+        return listaFavoritos;
+    }
+
+    public void setListaFavoritos(Set<ListaFavoritos> listaFavoritos) {
+        this.listaFavoritos = listaFavoritos;
+    }
 }

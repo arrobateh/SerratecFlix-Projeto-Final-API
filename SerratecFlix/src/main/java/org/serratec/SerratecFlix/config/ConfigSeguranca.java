@@ -48,6 +48,8 @@ public class ConfigSeguranca {
                         .requestMatchers(HttpMethod.GET, "/series/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/filmes/").permitAll()
                         .requestMatchers(HttpMethod.GET, "/filmes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/categorias/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuarios/").permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuarios/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
 
