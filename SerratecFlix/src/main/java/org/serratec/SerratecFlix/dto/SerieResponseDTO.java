@@ -4,8 +4,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import org.serratec.SerratecFlix.domain.Categoria;
 import org.serratec.SerratecFlix.domain.Serie;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Schema(description = "Modelo de dados para resposta da série")
 public class SerieResponseDTO {
@@ -124,7 +129,9 @@ public class SerieResponseDTO {
         return avaliacoes;
     }
 
-    public void setCategorias(List<String> categorias) {
-        this.categorias = categorias;
-    }
+	public void setAvaliacoes(List<String> avaliacoes) {
+		this.avaliacoes = avaliacoes;
+	}
+
+    
 }
