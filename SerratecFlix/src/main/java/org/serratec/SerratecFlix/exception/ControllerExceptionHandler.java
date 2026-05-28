@@ -1,0 +1,77 @@
+package org.serratec.SerratecFlix.exception;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import org.serratec.SerratecFlix.exception.ErroResposta;
+import org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException;
+import org.serratec.SerratecFlix.exception.ConflitoException;
+
+import org.serratec.SerratecFlix.exception.ErroResposta;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+@ControllerAdvice
+public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+
+        List<String> erros = new ArrayList<>();
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+            erros.add(error.getField() + ": " + error.getDefaultMessage());
+        }
+
+        ErroResposta erroResposta = new ErroResposta(
+                status.value(),
+                "Existem campos invalidos.",
+                LocalDateTime.now(),
+                erros);
+
+        return super.handleExceptionInternal(ex, erroResposta, headers, status, request);
+    }
+
+    @ExceptionHandler(RecursoNaoEncontradoException.class)
+    public ResponseEntity<ErroResposta> handleRecursoNaoEncontrado(
+            org.serratec.SerratecFlix.exception.RecursoNaoEncontradoException ex) {
+
+        ErroResposta erroResposta = new ErroResposta(
+                HttpStatus.NOT_FOUND.value(),
+                ex.getMessage(),
+                LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroResposta);
+    }
+
+    @ExceptionHandler(ConflitoException.class)
+    public ResponseEntity<org.serratec.SerratecFlix.exception.ErroResposta> handleConflito(ConflitoException ex) {
+
+        ErroResposta erroResposta = new ErroResposta(
+                HttpStatus.CONFLICT.value(),
+                ex.getMessage(),
+                LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(erroResposta);
+    }
+
+    @ExceptionHandler(ConteudoInapropiadoException.class)
+    public ResponseEntity<ErroResposta> handleConteudoInapropriado(ConteudoInapropiadoException ex) {
+
+        ErroResposta erroResposta = new ErroResposta(
+                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                ex.getMessage(),
+                LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(erroResposta);
+    }
+
+}
