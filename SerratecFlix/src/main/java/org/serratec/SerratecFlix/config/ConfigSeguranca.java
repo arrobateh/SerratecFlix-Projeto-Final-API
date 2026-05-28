@@ -44,13 +44,16 @@ public class ConfigSeguranca {
                 .authorizeHttpRequests(auth -> auth
                         // Rotas públicas
                         .requestMatchers("/", "/index.html", "/favicon.ico").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/serie/").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/serie/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/series/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/series/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/filmes/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/filmes/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuarios/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
 
                         // Rotas protegidas
-                        .requestMatchers(HttpMethod.POST, "/serie/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/series/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/filmes/**").authenticated()
                         .requestMatchers("/avaliacao-serie/**").authenticated()
 
                         .anyRequest().authenticated()
