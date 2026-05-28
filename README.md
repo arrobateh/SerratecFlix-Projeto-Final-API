@@ -21,7 +21,7 @@ O **SerratecFlix** é uma plataforma de streaming geek onde usuários podem aval
 
 🧑‍💻 **Bruno Vitor** — Entidades Filme, Categoria e AvaliaçãoFilme com seus respectivos pacotes. Métodos adicionais de Ranking/filmes e listagem de filmes por categoria. Criação do README.
 
-🧑‍💻 **Igor Brian** — Entidades Usuario e ListaFavoritos com seus respectivos pacotes. Implementação da API externa ViaCep e histórico de filmes/séries assistidas do usuário.
+🧑‍💻 **Igor Bryan** — Entidades Usuario e ListaFavoritos com seus respectivos pacotes. Implementação da API externa ViaCep e histórico de filmes/séries assistidas do usuário.
 
 🧑‍💻 **Kenny Robert** — Implementação do pacote exception e filtro de conteúdo nas avaliações do usuário.
 
@@ -63,7 +63,7 @@ O **SerratecFlix** é uma plataforma de streaming geek onde usuários podem aval
 
 ```bash
 # Clone o repositório
-git clone https://github.com/arrobateh/SerratecFlix-Projeto-Final-API.git
+git clone https://github.com/seu-usuario/serratecflix.git
 cd serratecflix
 
 # Configure o banco em application.properties
@@ -95,6 +95,8 @@ Acesse a documentação: `http://localhost:8080/swagger-ui.html`
 
 `GET /filmes/categoria/{id}` — Lista por categoria
 
+`GET /filmes/ranking` — Lista um ranking de filmes de acordo com a notaMedia por usuário
+
 `GET /avaliacoes-filme` — Lista avaliações de filmes
 
 `POST /avaliacoes-filme` — Cadastra avaliação de filme
@@ -107,9 +109,9 @@ Acesse a documentação: `http://localhost:8080/swagger-ui.html`
 
 `DELETE /series/{id}` — Remove série
 
-`GET /avaliacoes-series` — Lista avaliações de séries
+`GET /avaliacao-serie` — Lista avaliações de séries
 
-`POST /avaliacoes-series` — Cadastra avaliação de série
+`POST /avaliacao-serie` — Cadastra avaliação de série
 
 **🗂️ Categorias**
 
