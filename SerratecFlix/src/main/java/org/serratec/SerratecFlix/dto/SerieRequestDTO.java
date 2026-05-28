@@ -13,8 +13,8 @@ public class SerieRequestDTO {
     @Schema(description = "O título da série", example = "Stranger Things", required = true)
     private String tituloSerie;
 
-    @NotBlank(message = "A descrição da série é obrigatória")
-    @Size(max = 200, message = "A descrição da série deve conter até 100 caracteres")
+
+
     @Schema(description = "A descrição da série", example = "Série de suspense e ficção científica ambientada nos anos 80", required = true)
     private String descricaoSerie;
 

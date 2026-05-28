@@ -37,8 +37,6 @@ public class Serie {
     @Column(name = "titulo_serie")
     private String tituloSerie;
 
-    @NotBlank(message = "A descrição da série é obrigatória")
-    @Size(max = 200, message = "A descrição da série deve conter até 100 caracteres")
     @Column(name = "descricao_serie")
     private String descricaoSerie;
 

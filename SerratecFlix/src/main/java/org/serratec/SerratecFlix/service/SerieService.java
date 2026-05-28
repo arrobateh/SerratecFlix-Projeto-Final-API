@@ -9,7 +9,12 @@ import org.serratec.SerratecFlix.repository.CategoriaRepository;
 import org.serratec.SerratecFlix.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import tools.jackson.databind.JsonNode;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +29,10 @@ public class SerieService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
+    private final String OMDB_KEY = "5a59a414";
 
     // 1. Selecionar todas as séries
     public List<SerieResponseDTO> listarTodos() {
@@ -46,15 +55,48 @@ public class SerieService {
 
         Serie serie = new Serie();
         serie.setTituloSerie(serieRequest.getTituloSerie());
-        serie.setDescricaoSerie(serieRequest.getDescricaoSerie());
-        serie.setTemporadas(serieRequest.getTemporadas());
+//        serie.setTemporadas(serieRequest.getTemporadas());
         serie.setEpisodios(serieRequest.getEpisodios());
         serie.setDataLancamento(serieRequest.getDataLancamento());
         serie.setCategorias(new HashSet<>(Set.of(categoria)));
 
-        serieRepository.save(serie);
+        try {
+            String tituloCodificado = URLEncoder.encode(serieRequest.getTituloSerie().trim(), "UTF-8");
+            String url = "http://www.omdbapi.com/?t=" + tituloCodificado + "&apikey=" + OMDB_KEY;
+            JsonNode jsonResponse = restTemplate.getForObject(url, JsonNode.class);
 
-        return new SerieResponseDTO(serie);
+            if (jsonResponse != null && "True".equals(jsonResponse.get("Response").asText())) {
+                String sinopseIngles = jsonResponse.get("Plot").asText();
+
+                // Extrair o numero de temporadas
+                String temporadas = jsonResponse.get("totalSeasons").asText();
+                if (temporadas != null && !temporadas.isEmpty()) {
+                    serie.setTemporadas(Integer.parseInt(temporadas));
+                }
+                
+
+                try {
+                    String urlTradutor = "https://api.mymemory.translated.net/get?q=" + URLEncoder.encode(sinopseIngles, "UTF-8") + "&langpair=en|pt-BR";
+                    JsonNode tradutorResponse = restTemplate.getForObject(urlTradutor, JsonNode.class);
+                    if (tradutorResponse != null && tradutorResponse.has("responseData")) {
+                        String sinopsePtBr = tradutorResponse.get("responseData").get("translatedText").asText();
+                        serie.setDescricaoSerie(sinopsePtBr);
+                    } else {
+                        serie.setDescricaoSerie(sinopseIngles);
+                    }
+                } catch (Exception e) {
+                    serie.setDescricaoSerie(sinopseIngles);
+                }
+            } else {
+                serie.setDescricaoSerie("Sem descrição disponível.");
+            }
+        } catch (Exception e) {
+            serie.setDescricaoSerie("Erro ao acessar a API.");
+        }
+
+        Serie serieSalva = serieRepository.save(serie);
+
+        return new SerieResponseDTO(serieSalva);
     }
 
     // 4. Atualizar série
