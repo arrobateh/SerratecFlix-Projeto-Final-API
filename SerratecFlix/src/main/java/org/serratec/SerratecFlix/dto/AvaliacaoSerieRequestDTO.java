@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import org.serratec.SerratecFlix.validacao.ConteudoApropriado;
 
 @Schema(description = "Modelo de dados para cadastro de uma nova avaliacao de serie")
 public class AvaliacaoSerieRequestDTO {
@@ -24,6 +25,7 @@ public class AvaliacaoSerieRequestDTO {
     @Schema(description = "A nota da série", example = "8.5", required = true)
     private Double notaSerie;
 
+    @ConteudoApropriado
     @Schema(description = "O comentário da série", example = "Muito bom!", required = true)
     private String comentarioSerie;
 
