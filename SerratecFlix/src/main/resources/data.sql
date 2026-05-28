@@ -1,14 +1,14 @@
 /* Adicionar usuarios */
-INSERT INTO usuario (nome, email, username, senha, data_criacao)
-VALUES ('Bruno', 'bruno@serratec.org', 'bruno', '12345678', '2023-01-01');
-INSERT INTO usuario (nome, email, username, senha)
-VALUES ('Igor', 'igor@serratec.org', 'igor', '12345678');
-INSERT INTO usuario (nome, email, username, senha)
-VALUES ('Kenny', 'kenny@serratec.org', 'kenny', '12345678');
-INSERT INTO usuario (nome, email, username, senha)
-VALUES ('Pedro', 'pedro@serratec.org', 'pedro', '12345678');
-INSERT INTO usuario (nome, email, username, senha)
-VALUES ('Wallace', 'wallace@serratec.org', 'wallace', '12345678');
+INSERT INTO usuario (nome, email, username, senha, data_criacao, perfil)
+VALUES ('Bruno', 'bruno@serratec.org', 'bruno', '$2a$12$BlPEms6QJif8Jnq2QR2sp..h39PfkWO3M0Cduz8HZda.PJATtVK7K', '2023-01-01', 'ROLE_USER');
+INSERT INTO usuario (nome, email, username, senha, data_criacao, perfil)
+VALUES ('Igor', 'igor@serratec.org', 'igor', '$2a$12$BlPEms6QJif8Jnq2QR2sp..h39PfkWO3M0Cduz8HZda.PJATtVK7K', '2023-01-02', 'ROLE_USER');
+INSERT INTO usuario (nome, email, username, senha, data_criacao, perfil)
+VALUES ('Kenny', 'kenny@serratec.org', 'kenny', '$2a$12$BlPEms6QJif8Jnq2QR2sp..h39PfkWO3M0Cduz8HZda.PJATtVK7K', '2023-01-03', 'ROLE_USER');
+INSERT INTO usuario (nome, email, username, senha, data_criacao, perfil)
+VALUES ('Pedro', 'pedro@serratec.org', 'pedro', '$2a$12$BlPEms6QJif8Jnq2QR2sp..h39PfkWO3M0Cduz8HZda.PJATtVK7K', '2023-01-04', 'ROLE_USER');
+INSERT INTO usuario (nome, email, username, senha, data_criacao, perfil)
+VALUES ('Wallace', 'wallace@serratec.org', 'wallace', '$2a$12$BlPEms6QJif8Jnq2QR2sp..h39PfkWO3M0Cduz8HZda.PJATtVK7K', '2023-01-05', 'ROLE_USER');
 
 /* Adicionar endereços */
 INSERT INTO endereco (usuario_id, cep)

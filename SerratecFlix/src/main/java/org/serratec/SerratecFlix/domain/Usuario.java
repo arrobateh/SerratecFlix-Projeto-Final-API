@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
@@ -39,6 +40,9 @@ public class Usuario implements UserDetails {
 
     private LocalDate dataCriacao =  LocalDate.now();
 
+    // Perfil de usuario
+    private String perfil = "ROLE_USER";
+
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonManagedReference("usario-lista_favoritos")
     private List<ListaFavoritos> favoritos = new ArrayList<>();
@@ -47,9 +51,10 @@ public class Usuario implements UserDetails {
     @JsonManagedReference("usuario-endereco")
     private Endereco endereco;
 
+    // Método para verificar as permissões do usuário
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(new SimpleGrantedAuthority(this.perfil));
     }
 
     @Override
@@ -143,5 +148,13 @@ public class Usuario implements UserDetails {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 }
