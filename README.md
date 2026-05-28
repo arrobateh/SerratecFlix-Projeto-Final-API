@@ -7,7 +7,7 @@
 ## 🎯 Objetivo
 
 Desenvolver uma API RESTful completa, aplicando os conceitos estudados durante o curso.
-O projeto deverá seguir boas práticas de desenvolvimento backend, arquitetura em camadas, persistência de dados, autenticação, documentação e organização profissional do código.
+O projeto segue boas práticas de desenvolvimento backend, arquitetura em camadas, persistência de dados, autenticação, documentação e organização profissional do código.
 
 ---
 
