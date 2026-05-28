@@ -7,7 +7,7 @@
 ## 🎯 Objetivo
 
 Desenvolver uma API RESTful completa, aplicando os conceitos estudados durante o curso.
-O projeto segue boas práticas de desenvolvimento backend, arquitetura em camadas, persistência de dados, autenticação, documentação e organização profissional do código.
+O projeto deverá seguir boas práticas de desenvolvimento backend, arquitetura em camadas, persistência de dados, autenticação, documentação e organização profissional do código.
 
 ---
 
@@ -21,7 +21,7 @@ O **SerratecFlix** é uma plataforma de streaming geek onde usuários podem aval
 
 🧑‍💻 **Bruno Vitor** — Entidades Filme, Categoria e AvaliaçãoFilme com seus respectivos pacotes. Métodos adicionais de Ranking/filmes e listagem de filmes por categoria. Criação do README.
 
-🧑‍💻 **Igor Bryan** — Entidades Usuario e ListaFavoritos com seus respectivos pacotes. Implementação da API externa ViaCep, Swagger e histórico de filmes/séries assistidas do usuário.
+🧑‍💻 **Igor Bryan** — Entidades Usuario e ListaFavoritos com seus respectivos pacotes. Implementação da API externa ViaCep e histórico de filmes/séries assistidas do usuário.
 
 🧑‍💻 **Kenny Robert** — Implementação do pacote exception e filtro de conteúdo nas avaliações do usuário.
 
@@ -75,7 +75,7 @@ spring.datasource.password=sua_senha
 mvn spring-boot:run
 ```
 
-Acesse a documentação: `http://localhost:8080/swagger-ui/index.html#/`
+Acesse a documentação: `http://localhost:8080/swagger-ui.html`
 
 ---
 
@@ -130,6 +130,16 @@ Acesse a documentação: `http://localhost:8080/swagger-ui/index.html#/`
 `PUT /usuarios/{id}` — Atualiza usuário
 
 `DELETE /usuarios/{id}` — Remove usuário
+
+**❤️ Lista Favoritos**
+
+`GET /listaFavoritos` — Lista os favoritos por cada usuário
+
+`GET /listaFavoritos/{id}` — Busca favorito por ID de usuário
+
+`POST /listaFavoritos` — Adiciona conteúdo aos favoritos
+
+`DELETE /listaFavoritos/{id}` — Remove conteúdo dos favoritos
 
 ---
 
