@@ -60,7 +60,9 @@ public class UsuarioService {
         String senhaCriptografada = encoder.encode(usuarioRequestDto.getSenha());
         usuario.setSenha(senhaCriptografada);
         usuario.setEmail(usuarioRequestDto.getEmail());
-        usuario.setUsername(usuarioRequestDto.getUsernameDomain()); //Adicionei esse mét0do
+        usuario.setUsername(usuarioRequestDto.getUsernameDomain());
+        usuario.setEndereco(endereco);
+        endereco.setUsuario(usuario);
         return UsuarioResponseDto.from(usuarioRepository.save(usuario));
     }
 
